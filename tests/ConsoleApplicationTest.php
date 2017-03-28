@@ -30,8 +30,10 @@ class ConsoleApplicationTest extends TestCase
 
     public function getStubbedKernel(): Kernel
     {
-        return new class(__DIR__) extends Kernel
+        return new class extends Kernel
         {
+            public function __construct() {}
+            
             public function getContainer(): ContainerInterface
             {
                 return new class implements ContainerInterface
