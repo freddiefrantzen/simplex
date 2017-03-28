@@ -42,6 +42,11 @@ class Kernel
             throw new \RuntimeException("Base path does not exist: $baseDir");
         }
 
+        $baseConfigFile = $baseDir . '/config/config.php';
+        if (!file_exists($baseConfigFile)) {
+            throw new \RuntimeException("Could not find base config file. Expected $baseConfigFile");
+        }
+
         $this->baseDir = $baseDir;
     }
 
@@ -136,6 +141,7 @@ class Kernel
 
     private function loadDefinitions(ContainerBuilder $containerBuilder): void
     {
+        $containerBuilder->addDefinitions(__DIR__ . '/config/services.php');
         $containerBuilder->addDefinitions($this->baseDir. '/src/Shared/config/services.php');
 
         foreach ($this->modulePaths as $index => $dir) {
