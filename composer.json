@@ -12,13 +12,11 @@
         }
     },
     "require": {
-        "ext-gmp": "*",
         "doctrine/annotations": "^1.4",
         "doctrine/cache": "^1.6",
         "doctrine/orm": "^2.5",
         "filp/whoops": "^2.1",
         "lukasoppermann/http-status": "^2.0",
-        "mdanter/ecc": "0.4.0",
         "ocramius/proxy-manager": "^2.1",
         "php-di/php-di": "^5.4",
         "relay/relay": "^1.1",

@@ -24,9 +24,7 @@ use Simplex\Routing\RouteCollectionBuilder;
 
 class Kernel
 {
-    const BASE_DIR = __DIR__ . '/../../';
-
-    const CONFIG_DIR = __DIR__ . '/../../config/';
+    private $baseDir;
 
     private $initialized = false;
 
@@ -35,6 +33,17 @@ class Kernel
 
     /** @var Container */
     private $container;
+
+    public function __construct(string $baseDir)
+    {
+        $baseDir = rtrim($baseDir, '/');
+
+        if (!file_exists($baseDir)) {
+            throw new \RuntimeException("Base path does not exist: $baseDir");
+        }
+
+        $this->baseDir = $baseDir;
+    }
 
     public function boot(): void
     {
@@ -77,8 +86,8 @@ class Kernel
 
     private function loadEnvironmentVars(): void
     {
-        if (is_readable(self::BASE_DIR . '.env')) {
-            $dotenv = new Dotenv(self::BASE_DIR);
+        if (is_readable($this->baseDir . '/.env')) {
+            $dotenv = new Dotenv($this->baseDir);
             $dotenv->load();
         }
 
@@ -89,9 +98,9 @@ class Kernel
 
     private function loadConfig(ContainerBuilder $containerBuilder): void
     {
-        $containerBuilder->addDefinitions(self::CONFIG_DIR . 'config.php');
+        $containerBuilder->addDefinitions($this->baseDir . '/config/config.php');
 
-        $envConfig = self::CONFIG_DIR . 'config_' . getenv('FRAMEWORK_ENV') . '.php';
+        $envConfig = $this->baseDir . '/config/config_' . getenv('FRAMEWORK_ENV') . '.php';
         if (is_readable($envConfig)) {
             $containerBuilder->addDefinitions($envConfig);
         }
@@ -100,7 +109,7 @@ class Kernel
     private function loadModulePaths(): void
     {
         $finder = new Finder();
-        $finder->directories()->depth(0)->in(self::BASE_DIR . 'src/App/Module');
+        $finder->directories()->depth(0)->in($this->baseDir . '/src/Module');
 
         foreach ($finder as $dir) {
 
@@ -109,7 +118,7 @@ class Kernel
             $this->modulePaths[] = $moduleDir;
         }
 
-        $moduleFile = self::CONFIG_DIR . 'modules.php';
+        $moduleFile = $this->baseDir . '/config/modules.php';
         if (!is_readable($moduleFile)) {
             return;
         }
@@ -127,8 +136,7 @@ class Kernel
 
     private function loadDefinitions(ContainerBuilder $containerBuilder): void
     {
-        $containerBuilder->addDefinitions(__DIR__ . '/config/services.php');
-        $containerBuilder->addDefinitions(self::BASE_DIR . 'src/App/Shared/config/services.php');
+        $containerBuilder->addDefinitions($this->baseDir. '/src/Shared/config/services.php');
 
         foreach ($this->modulePaths as $index => $dir) {
 
@@ -161,7 +169,7 @@ class Kernel
     private function buildContainer(ContainerBuilder $builder)
     {
         if (false == getenv('FRAMEWORK_DEBUG')) {
-            $builder->setDefinitionCache(new FilesystemCache(__DIR__ . '/../../cache/container'));
+            $builder->setDefinitionCache(new FilesystemCache($this->baseDir . '/cache/container'));
             $builder->writeProxiesToFile(true, 'tmp/proxies');
         }
 
