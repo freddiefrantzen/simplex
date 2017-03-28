@@ -1,0 +1,16 @@
+<phpunit
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+    colors="true"
+    printerClass="Frantzen\Framework\App\Shared\Testing\TestResultPrinter"
+    bootstrap="phpunit_bootstrap.php">
+
+    <testsuites>
+
+        <testsuite name="unit">
+            <directory>tests</directory>
+        </testsuite>
+
+    </testsuites>
+
+</phpunit>
