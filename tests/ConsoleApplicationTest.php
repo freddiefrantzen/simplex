@@ -33,7 +33,7 @@ class ConsoleApplicationTest extends TestCase
         return new class extends Kernel
         {
             public function __construct() {}
-            
+
             public function getContainer(): ContainerInterface
             {
                 return new class implements ContainerInterface
