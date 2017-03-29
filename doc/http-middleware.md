@@ -9,7 +9,7 @@ The Middleware Stack
 --------------------
 
 Simplex relies on `MatchRoute` and `DispatchController` core middleware. As a minimum requirement, these should be 
-included in the middleware stack defined in `/confifg.php`. For convenience a middleware for setting json response 
+included in the middleware stack defined in `/confifg.php`. For convenience, a middleware for setting json response 
 headers is also provided. 
 
 Here's an example, bare-bones middleware stack. Note that the order middleware gets added to the stack matters.
@@ -19,9 +19,9 @@ Here's an example, bare-bones middleware stack. Note that the order middleware g
 
 // /config.php
 
-use Frantzen\Framework\Core\HttpMiddleware\MatchRoute;
-use Frantzen\Framework\Core\HttpMiddleware\DispatchController;
-use Frantzen\Framework\Core\HttpMiddleware\SetJsonResponseHeaders;
+use Simplex\HttpMiddleware\MatchRoute;
+use Simplex\HttpMiddleware\DispatchController;
+use Simplex\HttpMiddleware\SetJsonResponseHeaders;
 
 return [
     

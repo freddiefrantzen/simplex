@@ -22,7 +22,7 @@ One you have a command you'll need to register it inside a module dependency inj
 Helper Set
 ----------
 
-If you need to register a helper set you can also do so using a dependency injection [definition]((http://php-di.org/) ).
+If you need to register a helper set you can also do so using a dependency injection [definition](http://php-di.org/doc/definition-overriding.html#arrays).
 
 ```php
 'console_helper_set' => function (ContainerInterface $c) {

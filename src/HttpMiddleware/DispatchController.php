@@ -61,6 +61,10 @@ class DispatchController
 
     private function injectBaseControllerDependencies($controller): void
     {
+        if (!$this->container->has('controller_dependencies')) {
+            return;
+        }
+
         $map = $this->container->get('controller_dependencies');
 
         foreach ($map as $setterName => $object) {

@@ -4,8 +4,8 @@ Controllers
 Creating Controllers
 --------------------
 
-Simplex ships with a base controller which provides access to the serializer and url generator as well as providing
-some convenience methods for generating responses. You controller's can optionally extent this base controller, you can 
+Simplex ships with a base controller which provides access to the serializer and url generator, as well as providing
+some convenience methods for generating responses. You controllers can optionally extent this base controller, you can 
 subclass the base controller (see below), create your own base controller or you may choose to create controllers 
 without inheritance :)
 
@@ -15,10 +15,10 @@ Here's an example controller, which extends the core, base controller.
 
 namespace Frantzen\Framework\App\Module\Demo\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Frantzen\Framework\Core\Controller;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Simplex\Controller;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DemoController extends Controller
 {
@@ -35,7 +35,7 @@ class DemoController extends Controller
 The first argument for all controller actions will be the `Request`, the second will be the `Response`, followed by
 the arguments as defined in the route definition.
 
-Controller actions must return a response. The base controller contains helper actions to simplify returning responses.
+Controller actions must return a response. The base controller contains helper methods to simplify creating responses.
 
 
 Extending the Base Controller
@@ -58,7 +58,9 @@ class MyBaseController
 }
 ```
 
-You will then need to define a [dependency injection](http://php-di.org/) definition, like so:
+You will then need to define a dependency injection [definition](http://php-di.org/doc/definition-overriding.html#arrays).
+
+If extending the core, base controller:
 
 ```php
 'controller_dependencies' => DI\add([
@@ -66,4 +68,9 @@ You will then need to define a [dependency injection](http://php-di.org/) defini
 ]),
 ```
 
-Use an empty array if none exist or if not using a base controller.
+If creating a a base controller that does not subclasse from the core:
+
+```php
+'controller_dependencies' => [
+    'foo' => DI\get(Foo::class),
+],
