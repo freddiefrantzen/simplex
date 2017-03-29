@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/freddiefrantzen/simplex.svg?style=svg&circle-token=6fac8255af08c50621568e6ced421fa925f4c301)](https://circleci.com/gh/freddiefrantzen/simplex)
+
 Simplex Framework
 =================
 
