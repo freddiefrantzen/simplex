@@ -10,9 +10,9 @@
  */
 namespace Simplex\HttpMiddleware;
 
-use Simplex\Routing\RouteParamsRegistry;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface;
+use Simplex\Routing\RouteParamsRegistry;
 use Symfony\Bridge\PsrHttpMessage\Factory\HttpFoundationFactory;
 use Symfony\Component\Routing\Matcher\UrlMatcher;
 use Symfony\Component\Routing\RequestContext;

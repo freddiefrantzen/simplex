@@ -12,7 +12,6 @@ namespace Simplex;
 
 use JMS\Serializer\SerializerInterface;
 use Lukasoppermann\Httpstatus\Httpstatuscodes;
-
 use Psr\Http\Message\ResponseInterface as Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -34,7 +33,7 @@ abstract class Controller implements Httpstatuscodes
         $this->serializer = $serializer;
     }
 
-    public function jsonResponse(Response $response, $data = null, int $status = self::HTTP_OK): Response
+    public function jsonResponse(Response $response, $data = null, int $status = 200): Response
     {
         if ($data !== null) {
 

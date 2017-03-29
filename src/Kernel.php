@@ -15,12 +15,12 @@ use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
 use Dotenv\Dotenv;
 use Interop\Container\ContainerInterface;
+use Simplex\Routing\RouteCollectionBuilder;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
-use Simplex\Routing\RouteCollectionBuilder;
 
 class Kernel
 {

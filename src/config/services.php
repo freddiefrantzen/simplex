@@ -10,14 +10,14 @@
  */
 
 use Interop\Container\ContainerInterface;
-use Simplex\HttpMiddleware\DispatchController;
-use Simplex\Routing\RouteParamsRegistry;
-use Simplex\HttpMiddleware\MatchRoute;
-use Simplex\Routing\RouteCollectionBuilder;
-use Simplex\Routing\AnnotationRouteCollectionBuilder;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use JMS\Serializer\SerializerInterface;
+use Simplex\HttpMiddleware\DispatchController;
+use Simplex\HttpMiddleware\MatchRoute;
 use Simplex\HttpMiddleware\SetJsonResponseHeaders;
+use Simplex\Routing\AnnotationRouteCollectionBuilder;
+use Simplex\Routing\RouteCollectionBuilder;
+use Simplex\Routing\RouteParamsRegistry;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
 
