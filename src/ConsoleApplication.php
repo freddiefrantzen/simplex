@@ -22,20 +22,21 @@ class ConsoleApplication
     {
         if (!$kernel->getContainer()->has('console_commands')) {
             $this->symfonyApplication = new Application();
+            return;
         }
-
-        $commands = $kernel->getContainer()->get('console_commands');
 
         $application = new Application();
-
-        /** @var Command $command */
-        foreach ($commands as $command) {
-            $application->add($command);
-        }
 
         if ($kernel->getContainer()->has('console_helper_set')) {
             $helperSet = $kernel->getContainer()->get('console_helper_set');
             $application->setHelperSet($helperSet);
+        }
+
+        $commands = $kernel->getContainer()->get('console_commands');
+
+        /** @var Command $command */
+        foreach ($commands as $command) {
+            $application->add($command);
         }
 
         $this->symfonyApplication = $application;
