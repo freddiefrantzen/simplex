@@ -59,7 +59,7 @@ class DispatchController
         return $this->container->get($controllerClass);
     }
 
-    private function injectBaseControllerDependencies($controller)
+    private function injectBaseControllerDependencies($controller): void
     {
         $map = $this->container->get('controller_dependencies');
 

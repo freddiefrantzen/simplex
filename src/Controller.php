@@ -23,12 +23,12 @@ abstract class Controller implements Httpstatuscodes
     /** @var SerializerInterface */
     private $serializer;
 
-    public function setUrlGenerator(UrlGeneratorInterface $urlGenerator)
+    public function setUrlGenerator(UrlGeneratorInterface $urlGenerator): void
     {
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function setSerializer(SerializerInterface $serializer)
+    public function setSerializer(SerializerInterface $serializer): void
     {
         $this->serializer = $serializer;
     }

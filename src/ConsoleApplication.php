@@ -41,7 +41,7 @@ class ConsoleApplication
         $this->symfonyApplication = $application;
     }
 
-    public function run()
+    public function run(): void
     {
         $this->symfonyApplication->run();
     }

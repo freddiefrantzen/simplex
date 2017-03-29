@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouteCollection;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
-class MAtchRouteTest extends TestCase
+class MatchRouteTest extends TestCase
 {
     public function test_it_passes_the_matched_route_to_the_registry()
     {
