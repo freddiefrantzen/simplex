@@ -10,7 +10,7 @@
  */
 namespace Simplex\Routing;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Routing\RouteCollection;
 
 interface RouteCollectionBuilder

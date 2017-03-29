@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Simplex\ConsoleApplication;
 use Simplex\Kernel;
 use Symfony\Component\Console\Command\Command;

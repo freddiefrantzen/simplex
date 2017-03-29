@@ -14,7 +14,7 @@ use DI\Container;
 use DI\ContainerBuilder;
 use Doctrine\Common\Cache\FilesystemCache;
 use Dotenv\Dotenv;
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Simplex\Routing\RouteCollectionBuilder;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Routing\Generator\UrlGenerator;

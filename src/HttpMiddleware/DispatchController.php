@@ -10,7 +10,7 @@
  */
 namespace Simplex\HttpMiddleware;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\Routing\RouteParamsRegistry;

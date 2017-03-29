@@ -9,8 +9,8 @@
  * file that was distributed with this source code.
  */
 
-use Interop\Container\ContainerInterface;
 use JMS\Serializer\SerializerInterface;
+use Psr\Container\ContainerInterface;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\MatchRoute;
 use Simplex\HttpMiddleware\SetJsonResponseHeaders;

@@ -12,8 +12,8 @@
 require __DIR__ . '/stub/BaseController.php';
 require __DIR__ . '/stub/Controller.php';
 
-use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpMiddleware\DispatchController;
