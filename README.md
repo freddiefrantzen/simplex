@@ -29,7 +29,7 @@ Installation
 
 Install with composer
 
-    $ composer create-project simplex/quickstart
+    $ composer create-project simplex/quickstart -s dev
     
 Once installed, create a `.env` file in the root directory (see the `.env.dist` template).
 
