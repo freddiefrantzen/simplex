@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-use Simplex\HttpMiddleware\MatchRoute;
-use Simplex\Routing\RouteParamsRegistry;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Simplex\HttpMiddleware\MatchRoute;
+use Simplex\Routing\RouteParamsRegistry;
+use Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\RouteCollection;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 

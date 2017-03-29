@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-use Simplex\ConsoleApplication;
-use Simplex\Kernel;
 use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
+use Simplex\ConsoleApplication;
+use Simplex\Kernel;
 use Symfony\Component\Console\Command\Command;
 
 class ConsoleApplicationTest extends TestCase

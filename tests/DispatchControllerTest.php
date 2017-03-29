@@ -12,12 +12,12 @@
 require __DIR__ . '/stub/BaseController.php';
 require __DIR__ . '/stub/Controller.php';
 
-use Simplex\HttpMiddleware\DispatchController;
-use Simplex\Routing\RouteParamsRegistry;
 use Interop\Container\ContainerInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Simplex\HttpMiddleware\DispatchController;
+use Simplex\Routing\RouteParamsRegistry;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
