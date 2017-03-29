@@ -11,7 +11,6 @@
 namespace Simplex;
 
 use Symfony\Component\Console\Application;
-use Doctrine\ORM\Tools\Console\ConsoleRunner;
 use Symfony\Component\Console\Command\Command;
 
 class ConsoleApplication
@@ -21,6 +20,10 @@ class ConsoleApplication
 
     public function __construct(Kernel $kernel)
     {
+        if (!$kernel->getContainer()->has('console_commands')) {
+            $this->symfonyApplication = new Application();
+        }
+
         $commands = $kernel->getContainer()->get('console_commands');
 
         $application = new Application();
@@ -34,8 +37,6 @@ class ConsoleApplication
             $helperSet = $kernel->getContainer()->get('console_helper_set');
             $application->setHelperSet($helperSet);
         }
-
-        ConsoleRunner::addCommands($application);
 
         $this->symfonyApplication = $application;
     }

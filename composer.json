@@ -14,7 +14,6 @@
     "require": {
         "doctrine/annotations": "^1.4",
         "doctrine/cache": "^1.6",
-        "doctrine/orm": "^2.5",
         "filp/whoops": "^2.1",
         "lukasoppermann/http-status": "^2.0",
         "ocramius/proxy-manager": "^2.1",
