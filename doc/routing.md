@@ -1,14 +1,14 @@
 Routing
 =======
 
-Simplex uses the [Symfony router](http://symfony.com/doc/current/components/routing.html). Presently you must use
+Simplex uses the [Symfony Router](http://symfony.com/doc/current/components/routing.html). Presently you must use
 annotations to define routes (php route builder is on the roadmap).
 
 
 Defining Routes using Annotations
 ---------------------------------
 
-For the purpose of extracting route annotations, Simplex will scann all classes inside each module's `Controller` 
+For the purpose of extracting route annotations, Simplex will scan all classes inside each module's `Controller` 
 directory. 
 
 Refer to the Symfony [documentation](http://symfony.com/doc/current/routing.html) for details about how to

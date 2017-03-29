@@ -1,7 +1,7 @@
 HTTP Middleware
 ===============
 
-Simplex uses the [relay](http://relayphp.com/) library for invoking [PSR7](http://www.php-fig.org/psr/psr-7/) compatible 
+Simplex uses the [Relay](http://relayphp.com/) library for invoking [PSR-7](http://www.php-fig.org/psr/psr-7/) compatible 
 middleware. 
 
 

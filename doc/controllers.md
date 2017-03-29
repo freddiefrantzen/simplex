@@ -68,7 +68,7 @@ If extending the core, base controller:
 ]),
 ```
 
-If creating a a base controller that does not subclasse from the core:
+If creating a base controller that does not subclasse from the core:
 
 ```php
 'controller_dependencies' => [
