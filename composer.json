@@ -12,6 +12,7 @@
         }
     },
     "require": {
+        "php": ">=7.1",
         "doctrine/annotations": "^1.4",
         "doctrine/cache": "^1.6",
         "filp/whoops": "^2.1",
