@@ -27,7 +27,11 @@ Some key benefits:
 Installation
 ------------
 
-Install with composer `composer create-project simplex/quickstart`.
+* Install with composer `composer create-project simplex/quickstart`
+* Once installed, create a `.env` file in the root directory (see the `.env.dist` template)
+* Run `composer init-db` to create the demo database and load the demo data
+* Now run `composer start` and point your browser to `http://localhost:8080/`
+
 
 
 Documentation
