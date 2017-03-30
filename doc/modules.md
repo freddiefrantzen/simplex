@@ -2,7 +2,8 @@ Modules
 =======
 
 Essentially, a module is simply a path to a code component containing some dependency injection 
-[definitions](http://php-di.org/doc/php-definitions.html). 
+[definitions](http://php-di.org/doc/php-definitions.html). You will find a 
+[demo module](https://github.com/freddiefrantzen/simplex-quickstart/tree/master/src/Module/Demo) in the quickstart.
 
 You can define whatever directory structure best fits your needs. The only stipulation is that a module contains a 
 `config` directory inside of which you include zero or more files containing the dependency injection definitions. See 
@@ -14,7 +15,7 @@ of paths to root module directories inside a top-level module file `config/modul
 ```php
 <?php
 
-// /modules.php
+// /config/modules.php
 
 return [
     __DIR__ . '/path/to/some/module',

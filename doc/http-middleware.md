@@ -17,7 +17,7 @@ Here's an example, bare-bones middleware stack. Note that the order middleware g
 ```php
 <?php
 
-// /config.php
+// /config/config.php
 
 use Simplex\HttpMiddleware\MatchRoute;
 use Simplex\HttpMiddleware\DispatchController;

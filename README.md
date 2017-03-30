@@ -21,7 +21,7 @@ A modular, micro framework build on top of the [PHP-DI](http://php-di.org/) depe
 * Supports route annotations
 * Built-in caching
 * [Doctrine ORM](http://www.doctrine-project.org/projects/orm.html) integration (can be replaced with ORM of your choice)
-* [Hateoas](https://github.com/willdurand/Hateoas) serializer integration 
+* [Hateoas serializer](https://github.com/willdurand/Hateoas) integration 
 
 
 Installation
@@ -51,6 +51,9 @@ Documentation
 * [Http Middleware](doc/http-middleware.md)
 * [Caching](doc/caching.md)
 * [Console Commands](doc/console-commands.md)
+
+See the [quickstart](https://github.com/freddiefrantzen/simplex-quickstart) for a demo module as well as 
+[Factories](http://php-di.org/doc/php-definitions.html#factories) for Doctrine ORM and Hateoas serializer.
 
 
 Roadmap
