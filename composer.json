@@ -6,6 +6,7 @@
             "email": "freddie@freddiefrantzen.com"
         }
     ],
+    "license": "MIT",
     "autoload": {
         "psr-4": {
             "Simplex\\": "src"
