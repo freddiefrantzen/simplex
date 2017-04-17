@@ -1,7 +1,7 @@
 {
     "name": "simplex/simplex",
     "description": "Modular, micro framework for PHP 7",
-    "keywords": "modular micro framework",
+    "keywords": ["modular", "micro framework"],
     "authors": [
         {
             "name": "Freddie Frantzen",
