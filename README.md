@@ -33,12 +33,15 @@ Install with composer
     
 Once installed, create a `.env` file in the root directory (see the `.env.dist` template).
 
-Now load the demo database and start a webserver.
+The quickstart demo requires a Mysql database. This can be created by running the following command
 
     $ composer init-db
-    $ composer start
+
+Now start a webserver
     
-Point your browser to `http://localhost:8080/`
+    $ php -S 0.0.0.0:8080 -t public public/app.php
+    
+And point your browser to `http://localhost:8080/`
 
 
 Documentation
