@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "9913de227fafa0aaef3c81f29bb91e51",
+    "content-hash": "dd0208aba03ed1325ec30d08e6c9d31d",
     "packages": [
         {
             "name": "container-interop/container-interop",
@@ -2168,66 +2168,6 @@
             "time": "2016-10-24T13:23:32+00:00"
         },
         {
-            "name": "zendframework/zend-config",
-            "version": "3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-config.git",
-                "reference": "a12e4a592bf66d9629b84960e268f3752e53abe4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-config/zipball/a12e4a592bf66d9629b84960e268f3752e53abe4",
-                "reference": "a12e4a592bf66d9629b84960e268f3752e53abe4",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*",
-                "php": "^5.6 || ^7.0",
-                "psr/container": "^1.0",
-                "zendframework/zend-stdlib": "^2.7.7 || ^3.1"
-            },
-            "conflict": {
-                "container-interop/container-interop": "<1.2.0"
-            },
-            "require-dev": {
-                "malukenho/docheader": "^0.1.5",
-                "phpunit/phpunit": "^5.7 || ^6.0",
-                "zendframework/zend-coding-standard": "~1.0.0",
-                "zendframework/zend-filter": "^2.7.1",
-                "zendframework/zend-i18n": "^2.7.3",
-                "zendframework/zend-servicemanager": "^2.7.8 || ^3.2.1"
-            },
-            "suggest": {
-                "zendframework/zend-filter": "^2.7.1; install if you want to use the Filter processor",
-                "zendframework/zend-i18n": "^2.7.3; install if you want to use the Translator processor",
-                "zendframework/zend-servicemanager": "^2.7.8 || ^3.2.1; if you need an extensible plugin manager for use with the Config Factory"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev",
-                    "dev-develop": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Config\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "description": "provides a nested object property based user interface for accessing this configuration data within application code",
-            "homepage": "https://github.com/zendframework/zend-config",
-            "keywords": [
-                "config",
-                "zf2"
-            ],
-            "time": "2017-02-22T14:31:10+00:00"
-        },
-        {
             "name": "zendframework/zend-diactoros",
             "version": "1.3.10",
             "source": {
@@ -2330,51 +2270,6 @@
                 "zf2"
             ],
             "time": "2016-12-19T21:47:12+00:00"
-        },
-        {
-            "name": "zendframework/zend-stdlib",
-            "version": "3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/debedcfc373a293f9250cc9aa03cf121428c8e78",
-                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "athletic/athletic": "~0.1",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "^2.6.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev",
-                    "dev-develop": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Stdlib\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "homepage": "https://github.com/zendframework/zend-stdlib",
-            "keywords": [
-                "stdlib",
-                "zf2"
-            ],
-            "time": "2016-09-13T14:38:50+00:00"
         }
     ],
     "packages-dev": [
@@ -3627,6 +3522,51 @@
                 "validate"
             ],
             "time": "2016-11-23T20:04:58+00:00"
+        },
+        {
+            "name": "zendframework/zend-stdlib",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zendframework/zend-stdlib.git",
+                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/debedcfc373a293f9250cc9aa03cf121428c8e78",
+                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0"
+            },
+            "require-dev": {
+                "athletic/athletic": "~0.1",
+                "phpunit/phpunit": "~4.0",
+                "squizlabs/php_codesniffer": "^2.6.2"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.1-dev",
+                    "dev-develop": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Zend\\Stdlib\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "homepage": "https://github.com/zendframework/zend-stdlib",
+            "keywords": [
+                "stdlib",
+                "zf2"
+            ],
+            "time": "2016-09-13T14:38:50+00:00"
         }
     ],
     "aliases": [],

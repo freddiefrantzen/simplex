@@ -11,5 +11,7 @@ will disable caching and enable the debug error handler.
 You can define your own environments simply by placing a file inside the root configuration directory and naming it
 `config_[your-env-name]`. To run in this environment modify the value of `FRAMEWORK_ENV`.
 
-Environments all inherit from the base environment (which should be be used for production). Note that any keys you 
-define in your environments will completely overwrite the base environment (currently, settings will not be merged).
+Environments all inherit from the base environment (which should be be used for production). Config and service 
+definitions will be merged recursively. Settings in the base configuration file override setting in module configuration
+files. Settings in environment configuration files will override settings in the base configuration file and in module 
+configuration files. 
