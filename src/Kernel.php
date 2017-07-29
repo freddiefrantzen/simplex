@@ -28,8 +28,8 @@ class Kernel
 
     private $initialized = false;
 
-    /** @var array */
-    private $modulePaths = [];
+    /** @var Module[] */
+    private $modules;
 
     /** @var Container */
     private $container;
@@ -60,7 +60,7 @@ class Kernel
 
         $this->loadConfig($containerBuilder);
 
-        $this->loadModulePaths();
+        $this->loadModules();
 
         $this->loadDefinitions($containerBuilder);
 
@@ -111,32 +111,28 @@ class Kernel
         }
     }
 
-    private function loadModulePaths(): void
+    private function loadModules(): void
     {
-        $finder = new Finder();
-        $finder->directories()->depth(0)->in($this->baseDir . '/src/Module');
-
-        foreach ($finder as $dir) {
-
-            $moduleDir = $dir->getPathname();
-
-            $this->modulePaths[] = $moduleDir;
-        }
-
         $moduleFile = $this->baseDir . '/config/modules.php';
+
         if (!is_readable($moduleFile)) {
-            return;
+            throw new \RuntimeException('Could not read module file ' . $moduleFile);
         }
 
-        $explicitlyDefinedModules = include $moduleFile;
+        $modules = include $moduleFile;
 
-        foreach ($explicitlyDefinedModules as $index => $dir) {
-            if (!file_exists($dir)) {
-                throw new \RuntimeException("Module path does not exist: $dir");
-            }
+        if (!is_array($modules)) {
+            throw new \LogicException('The module file should return an array of module instances');
         }
 
-        $this->modulePaths = array_merge($this->modulePaths, $explicitlyDefinedModules);
+        foreach ($modules as $module) {
+            $this->loadModule($module);
+        }
+    }
+
+    private function loadModule(Module $module): void
+    {
+        $this->modules[get_class($module)] = $module;
     }
 
     private function loadDefinitions(ContainerBuilder $containerBuilder): void
@@ -144,11 +140,22 @@ class Kernel
         $containerBuilder->addDefinitions(__DIR__ . '/config/services.php');
         $containerBuilder->addDefinitions($this->baseDir. '/src/Shared/config/services.php');
 
-        foreach ($this->modulePaths as $index => $dir) {
+        foreach ($this->modules as $module) {
 
-            $configDir = $dir. '/config';
-            if (!is_readable($configDir)) {
+            $configDir = rtrim($module->getServiceConfigDirectory(), '/');
+
+            if (null === $configDir) {
                 continue;
+            }
+
+            if (!is_dir($configDir)) {
+                throw new \LogicException(
+                    'Error when attempting to load the' . get_class($module) . 'module. '. $configDir . ' is not a directory'
+                );
+            }
+
+            if (!is_readable($configDir)) {
+                throw new \RuntimeException('The module config directory ' . $configDir . ' is not readable');
             }
 
             $finder = new Finder();
@@ -164,7 +171,7 @@ class Kernel
     {
         $builder = $this->container->get(RouteCollectionBuilder::class);
 
-        $routeCollection = $builder->build($this->container, $this->modulePaths);
+        $routeCollection = $builder->build($this->container, $this->modules);
 
         $urlGenerator = new UrlGenerator($routeCollection, new RequestContext());
 

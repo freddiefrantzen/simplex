@@ -11,9 +11,11 @@
 namespace Simplex\Routing;
 
 use Psr\Container\ContainerInterface;
+use Simplex\Module;
 use Symfony\Component\Routing\RouteCollection;
 
 interface RouteCollectionBuilder
 {
-    public function build(ContainerInterface $container, array $modulePaths): RouteCollection;
+    /** @param array Module[] $modules */
+    public function build(ContainerInterface $container, array $modules): RouteCollection;
 }

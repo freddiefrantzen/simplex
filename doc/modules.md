@@ -1,16 +1,19 @@
 Modules
 =======
 
-Essentially, a module is simply a path to a code component containing some dependency injection 
-[definitions](http://php-di.org/doc/php-definitions.html). You will find a 
-[demo module](https://github.com/freddiefrantzen/simplex-quickstart/tree/master/src/Module/Demo) in the quickstart.
+A module is simply a code component containing a collection of logically grouped classes. You are free to define 
+whatever directory structure best fits your needs. 
 
-You can define whatever directory structure best fits your needs. The only stipulation is that a module contains a 
-`config` directory inside of which you include zero or more files containing the dependency injection definitions. See 
-[php-di](http://php-di.org/doc/php-definitions.html) for details of how to wire up your dependencies..
+A module must contain a `Module` class in the root module directory which must implement `Simplex\Module`. There is one
+method to implement, `getServiceConfigPath`. This should return a path to a directory inside of which you include zero 
+or more files containing the dependency injection definitions for you module, or `null` if your module does not contain 
+any definitions. See [php-di](http://php-di.org/doc/php-definitions.html) for details of how to wire up your 
+dependencies.
 
-Any modules under `src/Modules` will be auto-discovered. You can include modules in other locations by specifying an array
-of paths to root module directories inside a top-level module file `config/modules.php`. For example:
+You will find a [demo module](https://github.com/freddiefrantzen/simplex-quickstart/tree/master/src/Module/Demo) in the 
+quickstart.
+
+A new instance of each module should be added to the modules array in the root modules file.
 
 ```php
 <?php
@@ -18,7 +21,6 @@ of paths to root module directories inside a top-level module file `config/modul
 // /config/modules.php
 
 return [
-    __DIR__ . '/path/to/some/module',
-    __DIR__ . '/path/to/some/other/module',            
+    new AppModule(),
 ];
 ```

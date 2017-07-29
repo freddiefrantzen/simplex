@@ -20,7 +20,7 @@ use Symfony\Component\Routing\RouteCollection;
 
 class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
 {
-    public function build(ContainerInterface $container, array $modulePaths): RouteCollection
+    public function build(ContainerInterface $container, array $modules): RouteCollection
     {
         $reader = new CachedReader(
             new AnnotationReader(),
@@ -33,14 +33,18 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
         $annotationLoader = new AnnotationDirectoryLoader($fileLoader, $annotationClassLoader);
 
         $routeCollection = new RouteCollection();
-        foreach ($modulePaths as $index => $dir) {
 
-            $controllerDir = $dir. '/Controller';
+        foreach ($modules as $module) {
+            $reflector = new \ReflectionClass(get_class($module));
+            $fileInfo = new \SplFileInfo($reflector->getFileName());
+
+            $controllerDir = $fileInfo->getPath() . '/Controller';
+
             if (!is_readable($controllerDir)) {
                 continue;
             }
 
-            $routeCollection->addCollection($annotationLoader->load($dir. '/Controller'));
+            $routeCollection->addCollection($annotationLoader->load($controllerDir));
         }
 
         return $routeCollection;
