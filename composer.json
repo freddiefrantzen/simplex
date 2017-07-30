@@ -21,7 +21,7 @@
         "filp/whoops": "^2.1",
         "lukasoppermann/http-status": "^2.0",
         "ocramius/proxy-manager": "^2.1",
-        "php-di/php-di": "^5.4",
+        "php-di/php-di": "dev-master@dev",
         "relay/relay": "^1.1",
         "symfony/config": "^3.2",
         "symfony/console": "^3.2",
