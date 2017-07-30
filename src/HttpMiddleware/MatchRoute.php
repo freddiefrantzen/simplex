@@ -34,11 +34,11 @@ class MatchRoute
 
     public function __invoke(ServerRequestInterface $request, Response $response, callable $next)
     {
-        $response = $next($request, $response);
-
         $routeParameters = $this->matchRoute($request);
 
         $this->routeParamsRegistry->setRouteParams($routeParameters);
+
+        $response = $next($request, $response);
 
         return $response;
     }

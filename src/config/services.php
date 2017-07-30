@@ -12,7 +12,9 @@
 use JMS\Serializer\SerializerInterface;
 use Psr\Container\ContainerInterface;
 use Simplex\HttpMiddleware\DispatchController;
+use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\MatchRoute;
+use Simplex\HttpMiddleware\RegisterExceptionHandler;
 use Simplex\HttpMiddleware\SetJsonResponseHeaders;
 use Simplex\Routing\AnnotationRouteCollectionBuilder;
 use Simplex\Routing\RouteCollectionBuilder;
@@ -20,6 +22,14 @@ use Simplex\Routing\RouteParamsRegistry;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
+
+    RegisterExceptionHandler::class => function (ContainerInterface $c) {
+        return new RegisterExceptionHandler((bool) $c->get('debug_mode'), (string) $c->get('editor'));
+    },
+
+    LoadRoutes::class => function (ContainerInterface $c) {
+        return new LoadRoutes($c);
+    },
 
     MatchRoute::class => function (ContainerInterface $c) {
         return new MatchRoute($c->get('route_collection'), $c->get(RouteParamsRegistry::class));

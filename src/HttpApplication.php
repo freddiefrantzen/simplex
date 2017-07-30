@@ -17,17 +17,18 @@ use Relay\RelayBuilder;
 
 class HttpApplication
 {
-    /** @var Kernel */
-    private $kernel;
+    /** @var ContainerInterface */
+    private $container;
 
-    public function __construct(Kernel $kernel)
+    public function __construct(ContainerInterface $container)
     {
-        $this->kernel = $kernel;
+        $this->container = $container;
     }
 
     public function handleRequest(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
-        $container = $this->kernel->getContainer();
+        $container = $this->container;
+
         $resolver = function($class) use ($container) {
             return $container->get($class);
         };
@@ -42,8 +43,6 @@ class HttpApplication
 
     private function getMiddleware(ContainerInterface $container): array
     {
-        $queue = $container->get('middleware');
-
-        return array_reverse($queue);
+        return $container->get('middleware');
     }
 }

@@ -14,7 +14,6 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\HttpApplication;
-use Simplex\Kernel;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
@@ -22,8 +21,7 @@ class HttpApplicationTest extends TestCase
 {
     public function test_it_returns_a_response()
     {
-        $kernel = $this->getStubbedKernel();
-        $application = new HttpApplication($kernel);
+        $application = new HttpApplication($this->getStubbedContainer());
 
         $response = $application->handleRequest(new ServerRequest(), new Response());
 
@@ -32,50 +30,47 @@ class HttpApplicationTest extends TestCase
 
     public function test_it_invokes_middleware()
     {
-        $kernel = $this->getStubbedKernel();
-        $application = new HttpApplication($kernel);
+        $container = $this->getStubbedContainer();
+
+        $application = new HttpApplication($container);
 
         $application->handleRequest(new ServerRequest(), new Response());
 
-        $middleware = $kernel->getContainer()->get('test_middleware');
+        $middleware = $container->get('test_middleware');
 
         self::assertTrue($middleware::$wasInvoked);
     }
 
-    public function getStubbedKernel(): Kernel
+    public function getStubbedContainer(): ContainerInterface
     {
-        return new class extends Kernel
+        return new class implements ContainerInterface
         {
-            public function getContainer(): ContainerInterface
+            public function get($id)
             {
-                return new class implements ContainerInterface
-                {
-                    public function get($id)
-                    {
-                        if ($id === 'middleware') {
-                            return [
-                                'test_middleware'
-                            ];
-                        }
+                if ($id === 'middleware') {
+                    return [
+                        'test_middleware'
+                    ];
+                }
 
-                        if ($id === 'test_middleware') {
-                            return new class {
-                                public static $wasInvoked = false;
-                                public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
-                                {
-                                    $response = $next($request, $response);
-                                    self::$wasInvoked = true;
-                                    return $response;
-                                }
-                            };
-                        }
-                    }
-
-                    public function has($id)
+                if ($id === 'test_middleware') {
+                    return new class
                     {
-                        return true;
-                    }
-                };
+                        public static $wasInvoked = false;
+
+                        public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $next)
+                        {
+                            $response = $next($request, $response);
+                            self::$wasInvoked = true;
+                            return $response;
+                        }
+                    };
+                }
+            }
+
+            public function has($id)
+            {
+                return true;
             }
         };
     }

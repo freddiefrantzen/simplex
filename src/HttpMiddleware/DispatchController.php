@@ -31,8 +31,6 @@ class DispatchController
 
     public function __invoke(ServerRequestInterface $request, Response $response, callable $next)
     {
-        $response = $next($request, $response);
-
         $routeParameters = $this->routeParamsRegistry->getRouteParams();
 
         $controllerParts = explode('::', $routeParameters['_controller']);
@@ -43,13 +41,19 @@ class DispatchController
 
         $args = $this->resolveArgs($request, $response, $controllerParts, $routeParameters);
 
-        $response = call_user_func_array(
+        $controllerResponse = call_user_func_array(
             [
                 $controller,
                 $controllerParts[1],
             ],
             $args
         );
+
+        if (null !== $controllerResponse) {
+            $response = $controllerResponse;
+        }
+
+        $response = $next($request, $response);
 
         return $response;
     }

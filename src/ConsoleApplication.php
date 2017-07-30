@@ -10,6 +10,7 @@
  */
 namespace Simplex;
 
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Command\Command;
 
@@ -18,21 +19,21 @@ class ConsoleApplication
     /** @var Application */
     private $symfonyApplication;
 
-    public function __construct(Kernel $kernel)
+    public function __construct(ContainerInterface $container)
     {
-        if (!$kernel->getContainer()->has('console_commands')) {
+        if (!$container->has('console_commands')) {
             $this->symfonyApplication = new Application();
             return;
         }
 
         $application = new Application();
 
-        if ($kernel->getContainer()->has('console_helper_set')) {
-            $helperSet = $kernel->getContainer()->get('console_helper_set');
+        if ($container->has('console_helper_set')) {
+            $helperSet = $container->get('console_helper_set');
             $application->setHelperSet($helperSet);
         }
 
-        $commands = $kernel->getContainer()->get('console_commands');
+        $commands = $container->get('console_commands');
 
         /** @var Command $command */
         foreach ($commands as $command) {
