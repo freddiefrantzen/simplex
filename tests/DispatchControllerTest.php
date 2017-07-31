@@ -79,11 +79,13 @@ class DispatchControllerTest extends TestCase
             {
                 if ($id === 'controller_dependencies') {
                     return [
-                        'baz' => new class() {
-                            public function getName() {
-                                return 'baz';
-                            }
-                        },
+                        Controller::class => [
+                            'baz' => new class() {
+                                public function getName() {
+                                    return 'baz';
+                                }
+                            },
+                        ]
                     ];
                 }
 

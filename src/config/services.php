@@ -11,6 +11,7 @@
 
 use JMS\Serializer\SerializerInterface;
 use Psr\Container\ContainerInterface;
+use Simplex\Controller;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\MatchRoute;
@@ -51,9 +52,13 @@ return [
         return new AnnotationRouteCollectionBuilder();
     },
 
-    'controller_dependencies' => DI\add([
-        'urlGenerator' => DI\get(UrlGenerator::class),
-        'serializer' => DI\get(SerializerInterface::class),
-    ]),
+    'controller_dependencies' => DI\add(
+        [
+            Controller::class => [
+                'urlGenerator' => DI\get(UrlGenerator::class),
+                'serializer' => DI\get(SerializerInterface::class),
+            ]
+        ]
+    ),
 
 ];

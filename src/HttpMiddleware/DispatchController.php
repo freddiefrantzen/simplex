@@ -37,7 +37,7 @@ class DispatchController
 
         $controller = $this->getController($controllerParts[0]);
 
-        $this->injectBaseControllerDependencies($controller);
+        $this->injectControllerDependencies($controller);
 
         $args = $this->resolveArgs($request, $response, $controllerParts, $routeParameters);
 
@@ -63,7 +63,7 @@ class DispatchController
         return $this->container->get($controllerClass);
     }
 
-    private function injectBaseControllerDependencies($controller): void
+    private function injectControllerDependencies($controller): void
     {
         if (!$this->container->has('controller_dependencies')) {
             return;
@@ -71,8 +71,14 @@ class DispatchController
 
         $map = $this->container->get('controller_dependencies');
 
-        foreach ($map as $setterName => $object) {
-            $controller->{'set' . ucfirst($setterName)}($object);
+        foreach ($map as $controllerClass => $dependencies) {
+            if (!$controller instanceof $controllerClass) {
+                continue;
+            }
+
+            foreach ($dependencies as $setterName => $object) {
+                $controller->{'set' . ucfirst($setterName)}($object);
+            }
         }
     }
 
@@ -95,6 +101,7 @@ class DispatchController
                 $args[] = $routeParameters[$parameter->getName()];
             }
         }
+
         return $args;
     }
 }
