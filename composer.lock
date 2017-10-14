@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "242bb8809a85e47d7bfe4a3d4d43e743",
+    "content-hash": "7d51dfb96da2783d7e7c3aa4cb6596d4",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1022,12 +1022,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-DI/PHP-DI.git",
-                "reference": "44a1683b70b0928d40743622a8346418b64531fc"
+                "reference": "569aa6305cbe7a41c91a8c2a9bef2adac4f7ba6d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/44a1683b70b0928d40743622a8346418b64531fc",
-                "reference": "44a1683b70b0928d40743622a8346418b64531fc",
+                "url": "https://api.github.com/repos/PHP-DI/PHP-DI/zipball/569aa6305cbe7a41c91a8c2a9bef2adac4f7ba6d",
+                "reference": "569aa6305cbe7a41c91a8c2a9bef2adac4f7ba6d",
                 "shasum": ""
             },
             "require": {
@@ -1043,6 +1043,7 @@
             },
             "require-dev": {
                 "doctrine/annotations": "~1.2",
+                "friendsofphp/php-cs-fixer": "^2.4",
                 "mnapoli/phpunit-easymock": "~0.2.3",
                 "ocramius/proxy-manager": "~2.0.2",
                 "phpunit/phpunit": "~5.7"
@@ -1067,11 +1068,15 @@
             "description": "The dependency injection container for humans",
             "homepage": "http://php-di.org/",
             "keywords": [
+                "PSR-11",
                 "container",
+                "container-interop",
                 "dependency injection",
-                "di"
+                "di",
+                "ioc",
+                "psr11"
             ],
-            "time": "2017-07-29 21:28:59"
+            "time": "2017-08-28 05:06:14"
         },
         {
             "name": "php-di/phpdoc-reader",
@@ -2533,6 +2538,52 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "mikey179/vfsStream",
+            "version": "v1.6.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mikey179/vfsStream.git",
+                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mikey179/vfsStream/zipball/d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
+                "reference": "d5fec95f541d4d71c4823bb5e30cf9b9e5b96145",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.5"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.6.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "org\\bovigo\\vfs\\": "src/main/php"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Frank Kleine",
+                    "homepage": "http://frankkleine.de/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Virtual file system to mock the real file system in unit tests.",
+            "homepage": "http://vfs.bovigo.org/",
+            "time": "2017-08-01T08:02:14+00:00"
+        },
         {
             "name": "myclabs/deep-copy",
             "version": "1.6.1",

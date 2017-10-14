@@ -12,6 +12,7 @@
 use JMS\Serializer\SerializerInterface;
 use Psr\Container\ContainerInterface;
 use Simplex\Controller;
+use Simplex\EnvironmentVariableLoader;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\MatchRoute;
@@ -23,6 +24,11 @@ use Simplex\Routing\RouteParamsRegistry;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
+
+    'env' => DI\env(EnvironmentVariableLoader::DEFAULT_ENVIRONMENT),
+    'compile_container' => DI\env(EnvironmentVariableLoader::COMPILE_CONTAINER_DEFAULT),
+
+    'debug_mode' => DI\env('DEBUG_MODE', false),
 
     RegisterExceptionHandler::class => function (ContainerInterface $c) {
         return new RegisterExceptionHandler((bool) $c->get('debug_mode'), (string) $c->get('editor'));

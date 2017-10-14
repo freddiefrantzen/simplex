@@ -12,197 +12,83 @@ namespace Simplex;
 
 use DI\Container;
 use DI\ContainerBuilder as PHPDIContainerBuilder;
-use Dotenv\Dotenv;
-use Symfony\Component\Finder\Finder;
+use Simplex\DefinitionLoader\DefinitionLoader;
 
 class ContainerBuilder
 {
-    const CONFIG_FILE_EXTENSION = '.php';
+    const CONTAINER_CLASS_SUFFIX = 'Container';
+    const CONTAINER_CLASS_FILE_EXTENSION = '.php';
 
-    const CONFIG_FILENAME = 'config.php';
-    const MODULES_FILENAME = 'modules.php';
-    const DOTENV_FILE_NAME = '.env';
-
-    const FRAMEWORK_ENVIRONMENT_VARIABLE_NAME = 'FRAMEWORK_ENV';
-    const DEFAULT_FRAMEWORK_ENVIRONMENT = 'dev';
-
-    const CACHE_ENABLED_ENVIRONMENT_VARIABLE_NAME = 'CACHE_ENABLED';
-    const CACHE_ENABLED_DEFAULT_VALUE = 0;
-
-    const MODULES_CONFIG_KEY = 'modules';
-
-    /**
-     * @var \SplFileInfo
-     */
+    /** @var \SplFileInfo */
     private $configDirectory;
 
-    public function __construct(\SplFileInfo $configDirectory)
-    {
+    /** @var PHPDIContainerBuilder */
+    private $phpDiContainerBuilder;
+
+    /** @var DefinitionLoader */
+    private $definitionLoader;
+
+    /** @var string */
+    private $environment;
+
+    /** @var bool */
+    private $compileContainer = false;
+
+    /** @var \SplFileInfo */
+    private $compiledContainerDirectory;
+
+    /** @var string */
+    private $compiledContainerClassName;
+
+    public function __construct(
+        \SplFileInfo $configDirectory,
+        PHPDIContainerBuilder $phpDiContainerBuilder,
+        DefinitionLoader $definitionLoader,
+        string $environment
+    ) {
         if (!$configDirectory->isDir() || !$configDirectory->isReadable()) {
-            throw new \RuntimeException('Path to config directory is invalid ' . $configDirectory->getRealPath());
+            throw new \RuntimeException('Invalid config directory path ' . $configDirectory->getRealPath());
         }
 
         $this->configDirectory = $configDirectory;
+        $this->phpDiContainerBuilder = $phpDiContainerBuilder;
+        $this->definitionLoader = $definitionLoader;
+        $this->environment = $environment;
+    }
+
+    public function enableCompilation(\SplFileInfo $compiledContainerDirectory): void
+    {
+        $this->compileContainer = true;
+        $this->compiledContainerDirectory = $compiledContainerDirectory;
+        $this->compiledContainerClassName =  ucfirst($this->environment) . self::CONTAINER_CLASS_SUFFIX;
+
+        $this->phpDiContainerBuilder->enableCompilation(
+            $this->compiledContainerDirectory->getPathname(),
+            $this->compiledContainerClassName
+        );
     }
 
     public function build(): Container
     {
-        $this->loadEnvironmentVars($this->configDirectory);
-
-        $environment = getenv(self::FRAMEWORK_ENVIRONMENT_VARIABLE_NAME);
-        $cacheEnabled = (bool) getenv(self::CACHE_ENABLED_ENVIRONMENT_VARIABLE_NAME);
-
-        $compiledContainerClassName =  ucfirst($environment) . 'Container';
-        $cacheDirectory = $this->configDirectory->getPath() . DIRECTORY_SEPARATOR . 'cache/container'; // @todo: remove from config
-
-        $containerBuilder = new PHPDIContainerBuilder();
-
-        if ($cacheEnabled) {
-            $containerBuilder->enableCompilation($cacheDirectory, $compiledContainerClassName);
+        if (!$this->compileContainer) {
+            $this->definitionLoader->load($this->phpDiContainerBuilder);
+            return $this->phpDiContainerBuilder->build();
         }
 
-        $compiledContainerClassFile = $cacheDirectory . '/' . $compiledContainerClassName . '.php';
-
-        if ($cacheEnabled && file_exists($compiledContainerClassFile)) {
-            // The container is already compiled
-            return $containerBuilder->build();
-        }
-
-        $this->addDefinitions($containerBuilder);
-
-        return $containerBuilder->build();
+        return $this->buildWithCompilation();
     }
 
-    private function loadEnvironmentVars(\SplFileInfo $configDirectory): void
+    private function buildWithCompilation(): Container
     {
-        $dotEnvFile = new \SplFileInfo($configDirectory->getPath() . DIRECTORY_SEPARATOR . self::DOTENV_FILE_NAME);
+        $compiledContainerClassFile = $this->compiledContainerDirectory->getPathname()
+            . DIRECTORY_SEPARATOR
+            . $this->compiledContainerClassName
+            . self::CONTAINER_CLASS_FILE_EXTENSION;
 
-        if ($dotEnvFile->isReadable()) {
-            $dotenv = new Dotenv($dotEnvFile->getPath());
-            $dotenv->load();
+        if (!file_exists($compiledContainerClassFile)) {
+            $this->definitionLoader->load($this->phpDiContainerBuilder);
         }
 
-        if (empty(getenv(self::FRAMEWORK_ENVIRONMENT_VARIABLE_NAME))) {
-            putenv(self::FRAMEWORK_ENVIRONMENT_VARIABLE_NAME . '=' . self::DEFAULT_FRAMEWORK_ENVIRONMENT);
-        }
-
-        if (empty(getenv(self::CACHE_ENABLED_ENVIRONMENT_VARIABLE_NAME))) {
-            putenv(self::CACHE_ENABLED_ENVIRONMENT_VARIABLE_NAME . '=' . self::CACHE_ENABLED_DEFAULT_VALUE);
-        }
-    }
-
-    private function addDefinitions(PHPDIContainerBuilder $containerBuilder): void
-    {
-        //$this->addVendorDefinitions(); @todo
-
-        $this->addCoreDefinitions($containerBuilder);
-
-        $this->addModuleDefinitions($containerBuilder);
-
-        $this->addBaseConfigDefinitions($containerBuilder);
-
-        $this->addEnvironmentConfigDefinitions($containerBuilder);
-    }
-
-    private function addCoreDefinitions(PHPDIContainerBuilder $containerBuilder): void
-    {
-        $containerBuilder->addDefinitions(__DIR__ . '/config/services.php');
-    }
-
-    private function addModuleDefinitions(PHPDIContainerBuilder $containerBuilder): void
-    {
-        $moduleList = $this->getModuleList();
-
-        foreach ($moduleList['modules']['app'] as $moduleClass) {
-
-            $module = new $moduleClass();
-
-            $containerBuilder->addDefinitions([
-                get_class($module) => \DI\create(get_class($module)),
-                'modules' => \DI\add([
-                    \DI\get(get_class($module)),
-                ]),
-            ]);
-
-            $this->loadModuleConfig($module, $containerBuilder);
-        }
-    }
-
-    /** return Module[] */
-    private function getModuleList(): array
-    {
-        $moduleFile = new \SplFileInfo(
-            $this->configDirectory->getPathname() . DIRECTORY_SEPARATOR . self::MODULES_FILENAME
-        );
-
-        return $this->loadConfigArray($moduleFile);
-    }
-
-    private function loadConfigArray(\SplFileInfo $file): array
-    {
-        if (!$file->isFile() || !$file->isReadable()) {
-            throw new \RuntimeException('Could not read config file ' . $file->getRealPath());
-        }
-
-        $config = include $file;
-
-        if (!is_array($config)) {
-            throw new \LogicException('Expected config file ' . $file->getPathname() . ' to return an array');
-        }
-
-        return $config;
-    }
-
-    private function loadModuleConfig(Module $module, PHPDIContainerBuilder $containerBuilder)
-    {
-        $configDirectoryPath = rtrim($module->getServiceConfigDirectory(), DIRECTORY_SEPARATOR);
-
-        if (null === $configDirectoryPath) {
-            return;
-        }
-
-        $configDirectory = $this->getConfigDirectory($configDirectoryPath);
-
-        $finder = new Finder();
-        $finder->files()->depth(0)->in($configDirectory->getPathname());
-
-        foreach ($finder as $file) {
-            $moduleConfig = $this->loadConfigArray($file);
-            $containerBuilder->addDefinitions($moduleConfig);
-        }
-    }
-
-    private function getConfigDirectory(string $configDirectoryPath): \SplFileInfo
-    {
-        $configDirectory = new \SplFileInfo(rtrim($configDirectoryPath, DIRECTORY_SEPARATOR));
-
-        if (!$configDirectory->isDir() || !$configDirectory->isReadable()) {
-            throw new \RuntimeException('Path to config directory is invalid ' . $configDirectory->getRealPath());
-        }
-
-        return $configDirectory;
-    }
-
-    private function addBaseConfigDefinitions(PHPDIContainerBuilder $containerBuilder): void
-    {
-        $baseConfigFile = new \SplFileInfo(
-            $this->configDirectory->getPathname() . DIRECTORY_SEPARATOR . self::CONFIG_FILENAME
-        );
-
-        $containerBuilder->addDefinitions($baseConfigFile->getPathname());
-    }
-
-    private function addEnvironmentConfigDefinitions(PHPDIContainerBuilder $containerBuilder): void
-    {
-        $environment = getenv(self::FRAMEWORK_ENVIRONMENT_VARIABLE_NAME);
-        $envConfigFilePath = $this->configDirectory->getPathname() . '/config_' . $environment . self::CONFIG_FILE_EXTENSION;
-
-        $envConfigFile = new \SplFileInfo($envConfigFilePath);
-
-        if (!$envConfigFile->isFile()) {
-            return;
-        }
-
-        $containerBuilder->addDefinitions($envConfigFile->getPathname());
+        return $this->phpDiContainerBuilder->build();
     }
 }

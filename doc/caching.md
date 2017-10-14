@@ -1,10 +1,11 @@
 Caching
 =======
 
-Set `FRAMEWORK_DEBUG=0` to enable caching. By default, the following components will be cached:
+Set `SIMPLEX_DEBUG=0` to enable caching. By default, the following components will be cached:
  
-* The DI container
 * The serializer
 * Route annotations
+
+To enable container compilation, set `COMPILE_CONTAINER=1`.
 
 It's recommended to disable caching while developing.

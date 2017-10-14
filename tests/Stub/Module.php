@@ -8,9 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Simplex;
+namespace Simplex\Tests\Stub;
 
-interface Module
+class Module implements \Simplex\Module
 {
-    public function getServiceDefinitionsDirectory(): ?string;
+    public static $serviceDefinitionDirectory = null;
+
+    public function getServiceDefinitionsDirectory(): ?string
+    {
+        return self::$serviceDefinitionDirectory;
+    }
 }

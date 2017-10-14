@@ -11,7 +11,8 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Simplex\\": "src"
+            "Simplex\\": "src",
+            "Simplex\\Tests\\": "tests"
         }
     },
     "require": {
@@ -33,6 +34,7 @@
         "zendframework/zend-diactoros": "^1.3"
     },
     "require-dev": {
-        "phpunit/phpunit": "^6.0"
+        "phpunit/phpunit": "^6.0",
+        "mikey179/vfsStream": "^1.6"
     }
 }
