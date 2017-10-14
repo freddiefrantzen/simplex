@@ -11,9 +11,6 @@ use Simplex\DefinitionLoader\ModuleDefinitionLoader;
 
 class Bootstrap
 {
-    const CACHE_DIRECTORY_NAME = 'cache';
-    const COMPILED_CONTAINER_DIRECTORY_NAME = 'container';
-
     /** @var Container */
     private static $container;
 
@@ -21,39 +18,37 @@ class Bootstrap
     {
         $configDirectory = new \SplFileInfo($configDirectoryPath);
 
-        $environmentVariableLoader = new EnvironmentVariableLoader();
-        $environmentVariableLoader->load($configDirectory);
+        $environment = new Environment();
+        $environment->load($configDirectory);
 
         $definitionLoader = new ChainDefinitionLoader(
             new CoreDefinitionLoader(),
             new ModuleDefinitionLoader($configDirectory),
-            new ConfigDefinitionLoader($configDirectory, $environmentVariableLoader->getSimplexEnvironment())
+            new ConfigDefinitionLoader($configDirectory, $environment->getSimplexEnvironment())
         );
 
         $containerBuilder = new ContainerBuilder(
             $configDirectory,
             new PHPDIContainerBuilder(),
             $definitionLoader,
-            $environmentVariableLoader->getSimplexEnvironment()
+            $environment->getSimplexEnvironment()
         );
 
-        if ($environmentVariableLoader->getCompileContainer()) {
+        if ($environment->getCompileContainer()) {
 
-            $compiledContainerDirectory = self::getCompiledContainerDirectory($configDirectory);
+            $compiledContainerDirectory = self::getCompiledContainerDirectory();
             $containerBuilder->enableCompilation($compiledContainerDirectory);
         }
 
         self::$container = $containerBuilder->build();
     }
 
-    private static function getCompiledContainerDirectory(\SplFileInfo $configDirectory): \SplFileInfo
+    private static function getCompiledContainerDirectory(): \SplFileInfo
     {
         return new \SplFileInfo(
-            $configDirectory->getPathname()
+            CACHE_DIRECTORY
             . DIRECTORY_SEPARATOR
-            . self::CACHE_DIRECTORY_NAME
-            . DIRECTORY_SEPARATOR
-            . self::COMPILED_CONTAINER_DIRECTORY_NAME
+            . ContainerBuilder::COMPILED_CONTAINER_DIRECTORY_NAME
         );
     }
 

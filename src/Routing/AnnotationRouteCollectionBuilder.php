@@ -12,20 +12,40 @@ namespace Simplex\Routing;
 
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Psr\Container\ContainerInterface;
+use Simplex\Environment;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\AnnotationDirectoryLoader;
 use Symfony\Component\Routing\RouteCollection;
 
 class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
 {
+    /** @var bool */
+    private $enableCache;
+
+    /** @var string */
+    private $cacheDirectory;
+
+    public function __construct(bool $enableCache, string $cacheDirectory)
+    {
+        $this->enableCache = $enableCache;
+        $this->cacheDirectory = $cacheDirectory;
+    }
+
     public function build(ContainerInterface $container, array $modules): RouteCollection
     {
+        if (!$this->enableCache) {
+            $cache = new ArrayCache();
+        } else {
+            $cache = new FilesystemCache($this->cacheDirectory . '/routing');
+        }
+
         $reader = new CachedReader(
             new AnnotationReader(),
-            new FilesystemCache($container->get('cache_dir') . 'routing/'),
-            $container->get('debug_mode')
+            $cache,
+            $container->get(Environment::DEBUG_MODE_CONTAINER_KEY)
         );
 
         $fileLoader = new FileLocator();

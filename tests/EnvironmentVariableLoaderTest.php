@@ -12,7 +12,7 @@ namespace Simplex\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-use Simplex\EnvironmentVariableLoader;
+use Simplex\Environment;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
 class EnvironmentVariableLoaderTest extends TestCase
@@ -26,14 +26,14 @@ class EnvironmentVariableLoaderTest extends TestCase
     const FOO_ENV_VAR_NAME = 'FOO';
     const FOO_ENV_VAR_VALUE = 'bar';
 
-    /** @var EnvironmentVariableLoader */
+    /** @var Environment */
     private $environmentVariableLoader;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->environmentVariableLoader = new EnvironmentVariableLoader();
+        $this->environmentVariableLoader = new Environment();
     }
 
     protected function tearDown()
@@ -80,12 +80,12 @@ class EnvironmentVariableLoaderTest extends TestCase
         );
 
         self::assertEquals(
-            EnvironmentVariableLoader::COMPILE_CONTAINER_DEFAULT,
-            getenv(EnvironmentVariableLoader::COMPILE_CONTAINER_KEY)
+            Environment::COMPILE_CONTAINER_DEFAULT,
+            getenv(Environment::COMPILE_CONTAINER_ENV_VAR)
         );
 
         self::assertEquals(
-            (bool) EnvironmentVariableLoader::COMPILE_CONTAINER_DEFAULT,
+            (bool) Environment::COMPILE_CONTAINER_DEFAULT,
             $this->environmentVariableLoader->getCompileContainer()
         );
     }

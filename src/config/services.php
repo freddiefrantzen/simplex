@@ -12,7 +12,7 @@
 use JMS\Serializer\SerializerInterface;
 use Psr\Container\ContainerInterface;
 use Simplex\Controller;
-use Simplex\EnvironmentVariableLoader;
+use Simplex\Environment;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\MatchRoute;
@@ -25,13 +25,15 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
 
-    'env' => DI\env(EnvironmentVariableLoader::DEFAULT_ENVIRONMENT),
-    'compile_container' => DI\env(EnvironmentVariableLoader::COMPILE_CONTAINER_DEFAULT),
-
-    'debug_mode' => DI\env('DEBUG_MODE', false),
+    Environment::DEBUG_MODE_CONTAINER_KEY => DI\env(Environment::DEBUG_MODE_ENV_VAR, false),
+    Environment::ENABLE_CACHE_CONTAINER_KEY => DI\env(Environment::ENABLE_CACHE_ENV_VAR, false),
+    Environment::EDITOR_CONTAINER_KEY => DI\env(Environment::EDITOR_ENV_VAR, null),
 
     RegisterExceptionHandler::class => function (ContainerInterface $c) {
-        return new RegisterExceptionHandler((bool) $c->get('debug_mode'), (string) $c->get('editor'));
+        return new RegisterExceptionHandler(
+            (bool) $c->get(Environment::DEBUG_MODE_CONTAINER_KEY),
+            (string) $c->get(Environment::EDITOR_CONTAINER_KEY)
+        );
     },
 
     LoadRoutes::class => function (ContainerInterface $c) {
@@ -55,7 +57,10 @@ return [
     },
 
     RouteCollectionBuilder::class => function (ContainerInterface $c) {
-        return new AnnotationRouteCollectionBuilder();
+        return new AnnotationRouteCollectionBuilder(
+            (bool) $c->get(Environment::ENABLE_CACHE_CONTAINER_KEY),
+            CACHE_DIRECTORY
+        );
     },
 
     'controller_dependencies' => DI\add(
