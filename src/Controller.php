@@ -15,7 +15,7 @@ use Lukasoppermann\Httpstatus\Httpstatuscodes;
 use Psr\Http\Message\ResponseInterface as Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-abstract class Controller implements Httpstatuscodes
+abstract class Controller
 {
     const LOCATION_HEADER_NAME = 'Location';
 
