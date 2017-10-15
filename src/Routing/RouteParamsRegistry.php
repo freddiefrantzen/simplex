@@ -12,6 +12,10 @@ namespace Simplex\Routing;
 
 class RouteParamsRegistry
 {
+    const CONTROLLER_KEY = '_controller';
+
+    const ROUTE_KEY = '_route';
+
     private $routeParams;
 
     public function getRouteParams(): array

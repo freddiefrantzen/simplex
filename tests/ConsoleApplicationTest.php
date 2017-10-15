@@ -13,10 +13,13 @@ namespace Simplex\Tests;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Simplex\ConsoleApplication;
+use Simplex\ContainerKeys;
 use Symfony\Component\Console\Command\Command;
 
 class ConsoleApplicationTest extends TestCase
 {
+    const STUBBED_COMMAND_NAME = 'test:command';
+
     public function test_it_adds_commands_to_symfony_console_application()
     {
         $container = $this->getStubbedContainer();
@@ -25,7 +28,7 @@ class ConsoleApplicationTest extends TestCase
 
         $symfonyApplication = $application->getSymfonyApplication();
 
-        self::assertTrue($symfonyApplication->has('test:command'));
+        self::assertTrue($symfonyApplication->has(self::STUBBED_COMMAND_NAME));
     }
 
     public function getStubbedContainer(): ContainerInterface
@@ -34,11 +37,11 @@ class ConsoleApplicationTest extends TestCase
         {
             public function get($id)
             {
-                if ($id === 'console_commands') {
+                if ($id === ContainerKeys::CONSOLE_COMMANDS) {
                     return [
                         new class extends Command {
                             protected function configure() {
-                                $this->setName('test:command');
+                                $this->setName(ConsoleApplicationTest::STUBBED_COMMAND_NAME);
                             }
                         }
                     ];
@@ -47,7 +50,7 @@ class ConsoleApplicationTest extends TestCase
 
             public function has($id)
             {
-                if ($id === 'console_commands') {
+                if ($id === ContainerKeys::CONSOLE_COMMANDS) {
                     return true;
                 }
 

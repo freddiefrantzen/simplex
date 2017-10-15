@@ -13,6 +13,7 @@ namespace Simplex\HttpMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface;
+use Simplex\ContainerKeys;
 use Simplex\Routing\RouteParamsRegistry;
 
 class DispatchController
@@ -33,7 +34,7 @@ class DispatchController
     {
         $routeParameters = $this->routeParamsRegistry->getRouteParams();
 
-        $controllerParts = explode('::', $routeParameters['_controller']);
+        $controllerParts = explode('::', $routeParameters[RouteParamsRegistry::CONTROLLER_KEY]);
 
         $controller = $this->getController($controllerParts[0]);
 
@@ -65,11 +66,11 @@ class DispatchController
 
     private function injectControllerDependencies($controller): void
     {
-        if (!$this->container->has('controller_dependencies')) {
+        if (!$this->container->has(ContainerKeys::CONTROLLER_DEPENDENCIES)) {
             return;
         }
 
-        $map = $this->container->get('controller_dependencies');
+        $map = $this->container->get(ContainerKeys::CONTROLLER_DEPENDENCIES);
 
         foreach ($map as $controllerClass => $dependencies) {
             if (!$controller instanceof $controllerClass) {

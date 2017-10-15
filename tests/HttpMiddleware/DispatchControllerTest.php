@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Simplex\ContainerKeys;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\Routing\RouteParamsRegistry;
 use Simplex\Tests\Stub\BaseController;
@@ -52,10 +53,10 @@ class DispatchControllerTest extends TestCase
     private function getMiddleware()
     {
         $routeParams = [
-            '_route' => 'test',
-            '_controller' => Controller::class . '::testAction',
-            'id' => 'abc123',
-            'foo' => 'bar'
+            RouteParamsRegistry::ROUTE_KEY => 'test',
+            RouteParamsRegistry::CONTROLLER_KEY => Controller::class . '::testAction',
+            'id' => Controller::EXPECTED_VALUE_ID,
+            'foo' => Controller::EXPECTED_VALUE_FOO
         ];
 
         $registry = new RouteParamsRegistry();
@@ -77,7 +78,7 @@ class DispatchControllerTest extends TestCase
         {
             public function get($id)
             {
-                if ($id === 'controller_dependencies') {
+                if ($id === ContainerKeys::CONTROLLER_DEPENDENCIES) {
                     return [
                         Controller::class => [
                             'baz' => new class() {

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 use Simplex\Environment;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
-class EnvironmentVariableLoaderTest extends TestCase
+class EnvironmentTest extends TestCase
 {
     use VirtualFileSystemCapabilities;
 

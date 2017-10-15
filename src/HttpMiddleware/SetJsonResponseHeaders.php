@@ -15,13 +15,19 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class SetJsonResponseHeaders
 {
+    const ACCEPT_HEADER_NAME = 'accept';
+    const ACCEPT_HEADER_VALUE = 'application/json';
+
+    const CONTENT_TYPE_HEADER_NAME = 'content-type';
+    const CONTENT_TYPE_HEADER_VALUE = 'application/json';
+
     public function __invoke(ServerRequestInterface $request, Response $response, callable $next)
     {
         /** @var Response $response */
         $response = $next($request, $response);
 
         return $response
-            ->withHeader('accept', 'application/json')
-            ->withHeader('content-type', 'application/json');
+            ->withHeader(self::ACCEPT_HEADER_NAME, self::ACCEPT_HEADER_VALUE)
+            ->withHeader(self::CONTENT_TYPE_HEADER_NAME, self::CONTENT_TYPE_HEADER_VALUE);
     }
 }

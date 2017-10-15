@@ -11,6 +11,7 @@
 
 use JMS\Serializer\SerializerInterface;
 use Psr\Container\ContainerInterface;
+use Simplex\ContainerKeys;
 use Simplex\Controller;
 use Simplex\Environment;
 use Simplex\HttpMiddleware\DispatchController;
@@ -25,14 +26,14 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
 
-    Environment::DEBUG_MODE_CONTAINER_KEY => DI\env(Environment::DEBUG_MODE_ENV_VAR, false),
-    Environment::ENABLE_CACHE_CONTAINER_KEY => DI\env(Environment::ENABLE_CACHE_ENV_VAR, false),
-    Environment::EDITOR_CONTAINER_KEY => DI\env(Environment::EDITOR_ENV_VAR, null),
+    ContainerKeys::DEBUG_MODE => DI\env(Environment::DEBUG_MODE_ENV_VAR, false),
+    ContainerKeys::ENABLE_CACHE => DI\env(Environment::ENABLE_CACHE_ENV_VAR, false),
+    ContainerKeys::EDITOR => DI\env(Environment::EDITOR_ENV_VAR, null),
 
     RegisterExceptionHandler::class => function (ContainerInterface $c) {
         return new RegisterExceptionHandler(
-            (bool) $c->get(Environment::DEBUG_MODE_CONTAINER_KEY),
-            (string) $c->get(Environment::EDITOR_CONTAINER_KEY)
+            (bool) $c->get(ContainerKeys::DEBUG_MODE),
+            (string) $c->get(ContainerKeys::EDITOR)
         );
     },
 
@@ -41,7 +42,7 @@ return [
     },
 
     MatchRoute::class => function (ContainerInterface $c) {
-        return new MatchRoute($c->get('route_collection'), $c->get(RouteParamsRegistry::class));
+        return new MatchRoute($c->get(ContainerKeys::ROUTE_COLLECTION), $c->get(RouteParamsRegistry::class));
     },
 
     DispatchController::class => function (ContainerInterface $c) {
@@ -58,12 +59,12 @@ return [
 
     RouteCollectionBuilder::class => function (ContainerInterface $c) {
         return new AnnotationRouteCollectionBuilder(
-            (bool) $c->get(Environment::ENABLE_CACHE_CONTAINER_KEY),
+            (bool) $c->get(ContainerKeys::ENABLE_CACHE),
             CACHE_DIRECTORY
         );
     },
 
-    'controller_dependencies' => DI\add(
+    ContainerKeys::CONTROLLER_DEPENDENCIES => DI\add(
         [
             Controller::class => [
                 'urlGenerator' => DI\get(UrlGenerator::class),

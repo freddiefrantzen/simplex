@@ -17,6 +17,9 @@ class AnnotatedRouteControllerLoader extends AnnotationClassLoader
 {
     protected function configureRoute(Route $route, \ReflectionClass $class, \ReflectionMethod $method, $annot)
     {
-        $route->setDefault('_controller', $class->getName() . '::' . $method->getName());
+        $route->setDefault(
+            RouteParamsRegistry::CONTROLLER_KEY,
+            $class->getName() . '::' . $method->getName()
+        );
     }
 }

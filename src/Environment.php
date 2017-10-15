@@ -8,15 +8,9 @@ class Environment
 {
     const SIMPLEX_ENVIRONMENT_ENV_VAR = 'SIMPLEX_ENV';
     const COMPILE_CONTAINER_ENV_VAR = 'COMPILE_CONTAINER';
-
     const ENABLE_CACHE_ENV_VAR = 'ENABLE_CACHE';
-    const ENABLE_CACHE_CONTAINER_KEY = 'enable_cache';
-
     const DEBUG_MODE_ENV_VAR = 'DEBUG_MODE';
-    const DEBUG_MODE_CONTAINER_KEY = 'debug_mode';
-
     const EDITOR_ENV_VAR = 'EDITOR';
-    const EDITOR_CONTAINER_KEY = 'editor';
 
     const DOTENV_FILE_NAME = '.env';
 

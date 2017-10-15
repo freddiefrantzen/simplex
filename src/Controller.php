@@ -17,6 +17,10 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 abstract class Controller implements Httpstatuscodes
 {
+    const LOCATION_HEADER_NAME = 'Location';
+
+    const JSON_FORMAT = 'json';
+
     /** @var UrlGeneratorInterface */
     private $urlGenerator;
 
@@ -33,11 +37,11 @@ abstract class Controller implements Httpstatuscodes
         $this->serializer = $serializer;
     }
 
-    public function jsonResponse(Response $response, $data = null, int $status = 200): Response
+    public function jsonResponse(Response $response, $data = null, int $status = Httpstatuscodes::HTTP_OK): Response
     {
         if ($data !== null) {
 
-            $serialized = $this->serializer->serialize($data, 'json');
+            $serialized = $this->serializer->serialize($data, self::JSON_FORMAT);
 
             $response->getBody()->write($serialized);
         }
@@ -47,13 +51,13 @@ abstract class Controller implements Httpstatuscodes
 
     public function noContentResponse(Response $response): Response
     {
-        return $response->withStatus(self::HTTP_NO_CONTENT);
+        return $response->withStatus(Httpstatuscodes::HTTP_NO_CONTENT);
     }
 
     public function createdResponse(Response $response, string $resourceId): Response
     {
         return $response
-            ->withStatus(self::HTTP_CREATED)
-            ->withHeader('Location', $resourceId);
+            ->withStatus(Httpstatuscodes::HTTP_CREATED)
+            ->withHeader(self::LOCATION_HEADER_NAME, $resourceId);
     }
 }

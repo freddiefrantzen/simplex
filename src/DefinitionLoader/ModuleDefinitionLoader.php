@@ -3,13 +3,13 @@
 namespace Simplex\DefinitionLoader;
 
 use DI\ContainerBuilder;
+use Simplex\ContainerKeys;
 use Simplex\Module;
 use Symfony\Component\Finder\Finder;
 
 class ModuleDefinitionLoader implements DefinitionLoader
 {
     const MODULES_FILENAME = 'modules.php';
-    const MODULES_CONTAINER_KEY = 'modules';
 
     /** @var \SplFileInfo */
     private $configDirectory;
@@ -53,7 +53,7 @@ class ModuleDefinitionLoader implements DefinitionLoader
     {
         $containerBuilder->addDefinitions([
             get_class($module) => \DI\create(get_class($module)),
-            self::MODULES_CONTAINER_KEY => \DI\add([
+            ContainerKeys::MODULES => \DI\add([
                 \DI\get(get_class($module)),
             ]),
         ]);

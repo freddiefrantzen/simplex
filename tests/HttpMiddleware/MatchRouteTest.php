@@ -22,23 +22,26 @@ use Zend\Diactoros\ServerRequest;
 
 class MatchRouteTest extends TestCase
 {
+    const TEST_ROUTE_NAME = 'test';
+    const TEST_ROUTE_URI = '/test';
+
     public function test_it_passes_the_matched_route_to_the_registry()
     {
         $routeCollection = new RouteCollection();
-        $routeCollection->add('test', new Route('/test'));
+        $routeCollection->add(self::TEST_ROUTE_NAME, new Route(self::TEST_ROUTE_URI));
 
         $registry = new RouteParamsRegistry();
 
         $middleware = new MatchRoute($routeCollection, $registry);
 
-        $request = new ServerRequest([], [], '/test');
+        $request = new ServerRequest([], [], self::TEST_ROUTE_URI);
         $middleware($request, new Response(), $this->nextMiddleware());
 
         $params = $registry->getRouteParams();
 
         self::assertCount(1, $params);
-        self::assertArrayHasKey('_route', $params);
-        self::assertContains('test', $params);
+        self::assertArrayHasKey(RouteParamsRegistry::ROUTE_KEY, $params);
+        self::assertContains(self::TEST_ROUTE_NAME, $params);
     }
 
     public function nextMiddleware()

@@ -21,19 +21,19 @@ class ConsoleApplication
 
     public function __construct(ContainerInterface $container)
     {
-        if (!$container->has('console_commands')) {
+        if (!$container->has(ContainerKeys::CONSOLE_COMMANDS)) {
             $this->symfonyApplication = new Application();
             return;
         }
 
         $application = new Application();
 
-        if ($container->has('console_helper_set')) {
-            $helperSet = $container->get('console_helper_set');
+        if ($container->has(ContainerKeys::CONSOLE_HELPER_SET)) {
+            $helperSet = $container->get(ContainerKeys::CONSOLE_HELPER_SET);
             $application->setHelperSet($helperSet);
         }
 
-        $commands = $container->get('console_commands');
+        $commands = $container->get(ContainerKeys::CONSOLE_COMMANDS);
 
         /** @var Command $command */
         foreach ($commands as $command) {

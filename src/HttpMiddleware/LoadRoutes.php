@@ -13,6 +13,7 @@ namespace Simplex\HttpMiddleware;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface;
+use Simplex\ContainerKeys;
 use Simplex\Routing\RouteCollectionBuilder;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RequestContext;
@@ -40,13 +41,13 @@ class LoadRoutes
     {
         $builder = $this->container->get(RouteCollectionBuilder::class);
 
-        $modules = $this->container->get('modules');
+        $modules = $this->container->get(ContainerKeys::MODULES);
 
         $routeCollection = $builder->build($this->container, $modules);
 
         $urlGenerator = new UrlGenerator($routeCollection, new RequestContext());
 
-        $this->container->set('route_collection', $routeCollection);
+        $this->container->set(ContainerKeys::ROUTE_COLLECTION, $routeCollection);
         $this->container->set(UrlGenerator::class, $urlGenerator);
     }
 }

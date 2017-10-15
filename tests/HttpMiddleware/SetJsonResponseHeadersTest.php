@@ -26,8 +26,10 @@ class SetJsonResponseHeadersTest extends TestCase
         /** @var Response $response */
         $response = $middleware(new ServerRequest(), new Response(), $this->nextMiddleware());
 
-        self::assertTrue($response->hasHeader('accept'));
-        self::assertEquals('application/json', $response->getHeader('accept')[0]);
+        self::assertTrue($response->hasHeader(SetJsonResponseHeaders::ACCEPT_HEADER_NAME));
+        self::assertEquals(
+            SetJsonResponseHeaders::ACCEPT_HEADER_VALUE,
+            $response->getHeader(SetJsonResponseHeaders::ACCEPT_HEADER_NAME)[0]);
     }
 
     public function test_it_sets_content_type_header()
@@ -37,8 +39,11 @@ class SetJsonResponseHeadersTest extends TestCase
         /** @var Response $response */
         $response = $middleware(new ServerRequest(), new Response(), $this->nextMiddleware());
 
-        self::assertTrue($response->hasHeader('content-type'));
-        self::assertEquals('application/json', $response->getHeader('content-type')[0]);
+        self::assertTrue($response->hasHeader(SetJsonResponseHeaders::CONTENT_TYPE_HEADER_NAME));
+        self::assertEquals(
+            SetJsonResponseHeaders::CONTENT_TYPE_HEADER_VALUE,
+            $response->getHeader(SetJsonResponseHeaders::CONTENT_TYPE_HEADER_NAME)[0]
+        );
     }
 
     public function nextMiddleware()

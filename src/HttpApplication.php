@@ -43,6 +43,6 @@ class HttpApplication
 
     private function getMiddleware(ContainerInterface $container): array
     {
-        return $container->get('middleware');
+        return $container->get(ContainerKeys::MIDDLEWARE);
     }
 }

@@ -15,13 +15,17 @@ use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Cache\FilesystemCache;
 use Psr\Container\ContainerInterface;
-use Simplex\Environment;
+use Simplex\ContainerKeys;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\AnnotationDirectoryLoader;
 use Symfony\Component\Routing\RouteCollection;
 
 class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
 {
+    const ROUTING_CACHE_DIRECTORY = 'routing';
+
+    const CONTROLLER_DIRECTORY = 'Controller';
+
     /** @var bool */
     private $enableCache;
 
@@ -39,13 +43,13 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
         if (!$this->enableCache) {
             $cache = new ArrayCache();
         } else {
-            $cache = new FilesystemCache($this->cacheDirectory . '/routing');
+            $cache = new FilesystemCache($this->cacheDirectory . DIRECTORY_SEPARATOR . self::ROUTING_CACHE_DIRECTORY);
         }
 
         $reader = new CachedReader(
             new AnnotationReader(),
             $cache,
-            $container->get(Environment::DEBUG_MODE_CONTAINER_KEY)
+            $container->get(ContainerKeys::DEBUG_MODE)
         );
 
         $fileLoader = new FileLocator();
@@ -58,7 +62,7 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
             $reflector = new \ReflectionClass(get_class($module));
             $fileInfo = new \SplFileInfo($reflector->getFileName());
 
-            $controllerDir = $fileInfo->getPath() . '/Controller';
+            $controllerDir = $fileInfo->getPath() . DIRECTORY_SEPARATOR . self::CONTROLLER_DIRECTORY;
 
             if (!is_readable($controllerDir)) {
                 continue;

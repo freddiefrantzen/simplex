@@ -53,8 +53,6 @@ class MatchRoute
 
         $matcher = new UrlMatcher($this->routeCollection, $context);
 
-        $routeParameters = $matcher->match($request->getUri()->getPath());
-
-        return $routeParameters;
+        return $matcher->match($request->getUri()->getPath());
     }
 }
