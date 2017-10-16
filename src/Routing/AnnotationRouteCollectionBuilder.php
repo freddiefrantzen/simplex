@@ -22,7 +22,7 @@ use Symfony\Component\Routing\RouteCollection;
 
 class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
 {
-    const ROUTING_CACHE_DIRECTORY = 'routing';
+    const ROUTING_CACHE_DIRECTORY = 'router';
 
     const CONTROLLER_DIRECTORY = 'Controller';
 

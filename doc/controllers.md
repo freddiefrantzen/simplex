@@ -9,33 +9,34 @@ some convenience methods for generating responses. You controllers can optionall
 subclass the base controller (see below), create your own base controller or you may choose to create controllers 
 without inheritance :) 
 
-Here's an example controller, which extends the core, base controller.
+Here's an example controller which extends the core, base controller.
 ```php
 <?php
 
 namespace Frantzen\Framework\App\Module\Demo\Controller;
 
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Simplex\Controller;
+use Simplex\BaseController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class DemoController extends Controller
+class DemoController extends BaseController
 {
     /**
      * @Route("/{name}", methods={"GET"}, name="hello")
      */
-    public function index(Request $request, Response $response, string $name): Response
+    public function index(string $name): Response
     {
-        return $this->jsonResponse($response, ['hello' => $name]);
+        return $this->jsonResponse(['hello' => $name]);
     }
 }
 ```
 
-The first argument for all controller actions will be the `Request`, the second will be the `Response`, followed by
-the arguments as defined in the route definition.
+If you need to access request attributes directly you may (optionally) specify the first controller action argument as 
+of type `Psr\Http\Message\ServerRequestInterface`. This should be followed by the arguments as defined in the route 
+definition.
 
-Controller actions must return a response. The base controller contains helper methods to simplify creating responses.
+Controller actions must return a response of type `Psr\Http\Message\ResponseInterface` . The base controller contains 
+helper methods to simplify creating responses.
 
 
 Extending or Replacing the Base Controller

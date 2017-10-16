@@ -10,11 +10,22 @@
  */
 namespace Simplex\Tests\Stub;
 
-class BaseController
+use Psr\Http\Message\ResponseInterface;
+use Simplex\Controller;
+
+class BaseController implements Controller
 {
     public static $baz;
 
+    /** @var ResponseInterface */
+    private $response;
+
     public function setBaz($baz) {
         self::$baz = $baz;
+    }
+
+    public function setResponse(ResponseInterface $response): void
+    {
+        $this->response = $response;
     }
 }

@@ -31,4 +31,13 @@ class RouteParamsRegistry
     {
         $this->routeParams = $routeParams;
     }
+
+    public function getParameter(string $key): string
+    {
+        if (!isset($this->routeParams[$key])) {
+            throw new \RuntimeException("Route parameter '$key' does not exist'");
+        }
+
+        return $this->routeParams[$key];
+    }
 }
