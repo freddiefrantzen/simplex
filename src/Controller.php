@@ -22,10 +22,10 @@ abstract class Controller
     const JSON_FORMAT = 'json';
 
     /** @var UrlGeneratorInterface */
-    private $urlGenerator;
+    protected $urlGenerator;
 
     /** @var SerializerInterface */
-    private $serializer;
+    protected $serializer;
 
     public function setUrlGenerator(UrlGeneratorInterface $urlGenerator): void
     {
@@ -54,7 +54,7 @@ abstract class Controller
         return $response->withStatus(Httpstatuscodes::HTTP_NO_CONTENT);
     }
 
-    public function createdResponse(Response $response, string $resourceId): Response
+    public function createResponse(Response $response, string $resourceId): Response
     {
         return $response
             ->withStatus(Httpstatuscodes::HTTP_CREATED)
