@@ -20,7 +20,8 @@ class BaseController implements Controller
     /** @var ResponseInterface */
     private $response;
 
-    public function setBaz($baz) {
+    public function setBaz($baz)
+    {
         self::$baz = $baz;
     }
 

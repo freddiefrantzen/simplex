@@ -68,7 +68,10 @@ class DispatchControllerTest extends TestCase
     public function nextMiddleware()
     {
         return new class {
-            public function __invoke(ServerRequestInterface $request, ResponseInterface $response) { return $response; }
+            public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
+            {
+                return $response;
+            }
         };
     }
 
@@ -82,7 +85,8 @@ class DispatchControllerTest extends TestCase
                     return [
                         Controller::class => [
                             'baz' => new class() {
-                                public function getName() {
+                                public function getName()
+                                {
                                     return 'baz';
                                 }
                             },

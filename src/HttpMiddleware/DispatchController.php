@@ -93,8 +93,8 @@ class DispatchController
     private function resolveArgs(
         ServerRequestInterface $request,
         string $controllerClass,
-        string $controllerMethod): array
-    {
+        string $controllerMethod
+    ): array {
         $method = new \ReflectionMethod($controllerClass, $controllerMethod);
 
         $args = [];
@@ -105,7 +105,7 @@ class DispatchController
 
         foreach ($methodParameters as $parameter) {
 
-            if ($this->parameterIsOfType($parameter,ServerRequestInterface::class)) {
+            if ($this->parameterIsOfType($parameter, ServerRequestInterface::class)) {
                 $args[] = $request;
             }
 

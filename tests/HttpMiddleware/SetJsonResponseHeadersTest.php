@@ -29,7 +29,8 @@ class SetJsonResponseHeadersTest extends TestCase
         self::assertTrue($response->hasHeader(SetJsonResponseHeaders::ACCEPT_HEADER_NAME));
         self::assertEquals(
             SetJsonResponseHeaders::ACCEPT_HEADER_VALUE,
-            $response->getHeader(SetJsonResponseHeaders::ACCEPT_HEADER_NAME)[0]);
+            $response->getHeader(SetJsonResponseHeaders::ACCEPT_HEADER_NAME)[0]
+        );
     }
 
     public function test_it_sets_content_type_header()
@@ -49,7 +50,10 @@ class SetJsonResponseHeadersTest extends TestCase
     public function nextMiddleware()
     {
         return new class {
-            public function __invoke(ServerRequestInterface $request, ResponseInterface $response) { return $response; }
+            public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
+            {
+                return $response;
+            }
         };
     }
 }

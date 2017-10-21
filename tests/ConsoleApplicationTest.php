@@ -40,7 +40,8 @@ class ConsoleApplicationTest extends TestCase
                 if ($id === ContainerKeys::CONSOLE_COMMANDS) {
                     return [
                         new class extends Command {
-                            protected function configure() {
+                            protected function configure()
+                            {
                                 $this->setName(ConsoleApplicationTest::STUBBED_COMMAND_NAME);
                             }
                         }

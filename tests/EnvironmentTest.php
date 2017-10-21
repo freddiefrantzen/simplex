@@ -56,7 +56,8 @@ class EnvironmentTest extends TestCase
         $this->createVirtualFilesystem($this->getBaseFileStructure());
 
         $this->environmentVariableLoader->load(
-            new \SplFileInfo($this->getVfsRoot()
+            new \SplFileInfo(
+                $this->getVfsRoot()
                 . DIRECTORY_SEPARATOR
                 . self::CONFIG_DIR_NAME
             )
@@ -73,7 +74,8 @@ class EnvironmentTest extends TestCase
         $this->createVirtualFilesystem($fileStructure);
 
         $this->environmentVariableLoader->load(
-            new \SplFileInfo($this->getVfsRoot()
+            new \SplFileInfo(
+                $this->getVfsRoot()
                 . DIRECTORY_SEPARATOR
                 . self::CONFIG_DIR_NAME
             )

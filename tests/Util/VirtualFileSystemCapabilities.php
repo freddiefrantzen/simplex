@@ -32,7 +32,7 @@ trait VirtualFileSystemCapabilities
 
     private function generateRandomString(): string
     {
-        return substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', random_int(1, 10))),1, 10);
+        return substr(str_shuffle(str_repeat('abcdefghijklmnopqrstuvwxyz', random_int(1, 10))), 1, 10);
     }
 
     private function getVfsRoot(): string
