@@ -5,3 +5,4 @@ machine:
 test:
   pre:
     - composer validate
+    - vendor/bin/phpcs src test
