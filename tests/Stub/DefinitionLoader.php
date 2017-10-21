@@ -22,6 +22,9 @@ class DefinitionLoader implements DefinitionLoaderInterface
         $this->wasCalled = false;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function load(ContainerBuilder $containerBuilder): void
     {
         $this->wasCalled = true;

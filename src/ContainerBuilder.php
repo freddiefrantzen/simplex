@@ -41,6 +41,9 @@ class ContainerBuilder
     /** @var string */
     private $compiledContainerClassName;
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     */
     public function __construct(
         \SplFileInfo $configDirectory,
         PHPDIContainerBuilder $phpDiContainerBuilder,

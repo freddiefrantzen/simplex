@@ -10,7 +10,6 @@
  */
 namespace Simplex\Tests\Stub;
 
-use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response;
 
 class Controller extends BaseController
@@ -20,7 +19,7 @@ class Controller extends BaseController
 
     public static $wasCalledWthExpectedArgs = false;
 
-    public function testAction(ServerRequestInterface $request, string $id, string $foo)
+    public function testAction(string $id, string $foo)
     {
         if ($id === self::EXPECTED_VALUE_ID && $foo === self::EXPECTED_VALUE_FOO) {
             self::$wasCalledWthExpectedArgs = true;

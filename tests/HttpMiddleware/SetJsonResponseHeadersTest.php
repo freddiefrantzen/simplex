@@ -47,6 +47,9 @@ class SetJsonResponseHeadersTest extends TestCase
         );
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function nextMiddleware()
     {
         return new class {

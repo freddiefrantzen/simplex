@@ -6,3 +6,4 @@ test:
   pre:
     - composer validate
     - vendor/bin/phpcs src tests
+    - vendor/bin/phpmd "src,tests" text phpmd.xml

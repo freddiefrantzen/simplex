@@ -13,6 +13,7 @@ namespace Simplex\Routing;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Annotations\CachedReader;
 use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\Common\Cache\FilesystemCache;
 use Psr\Container\ContainerInterface;
 use Simplex\ContainerKeys;
@@ -20,6 +21,9 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Routing\Loader\AnnotationDirectoryLoader;
 use Symfony\Component\Routing\RouteCollection;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
 {
     const ROUTING_CACHE_DIRECTORY = 'router';
@@ -38,13 +42,12 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
         $this->cacheDirectory = $cacheDirectory;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     */
     public function build(ContainerInterface $container, array $modules): RouteCollection
     {
-        if (!$this->enableCache) {
-            $cache = new ArrayCache();
-        } else {
-            $cache = new FilesystemCache($this->cacheDirectory . DIRECTORY_SEPARATOR . self::ROUTING_CACHE_DIRECTORY);
-        }
+        $cache = $this->buildCache();
 
         $reader = new CachedReader(
             new AnnotationReader(),
@@ -72,5 +75,14 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
         }
 
         return $routeCollection;
+    }
+
+    private function buildCache(): CacheProvider
+    {
+        if (!$this->enableCache) {
+            return new ArrayCache();
+        }
+
+        return new FilesystemCache($this->cacheDirectory . DIRECTORY_SEPARATOR . self::ROUTING_CACHE_DIRECTORY);
     }
 }

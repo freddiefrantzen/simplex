@@ -44,6 +44,9 @@ class MatchRouteTest extends TestCase
         self::assertContains(self::TEST_ROUTE_NAME, $params);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function nextMiddleware()
     {
         return new class {

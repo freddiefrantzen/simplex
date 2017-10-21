@@ -45,6 +45,10 @@ class HttpApplicationTest extends TestCase
         self::assertTrue($middleware::$wasInvoked);
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function getStubbedContainer(): ContainerInterface
     {
         return new class implements ContainerInterface

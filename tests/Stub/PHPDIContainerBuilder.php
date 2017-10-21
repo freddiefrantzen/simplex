@@ -39,6 +39,9 @@ class PHPDIContainerBuilder extends ContainerBuilder
         return $this;
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     public function addDefinitions($definitions): ContainerBuilder
     {
         $this->definitionsLoaded = true;

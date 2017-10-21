@@ -15,6 +15,10 @@ use Symfony\Component\Routing\Route;
 
 class AnnotatedRouteControllerLoader extends AnnotationClassLoader
 {
+    /**
+     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
     protected function configureRoute(Route $route, \ReflectionClass $class, \ReflectionMethod $method, $annot)
     {
         $route->setDefault(

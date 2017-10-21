@@ -65,9 +65,13 @@ class DispatchControllerTest extends TestCase
         return new DispatchController($registry, $this->getStubbedContainer());
     }
 
+    /**
+     * @SuppressWarnings(PHPMD.UnusedLocalVariable)
+     */
     public function nextMiddleware()
     {
         return new class {
+
             public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
             {
                 return $response;
