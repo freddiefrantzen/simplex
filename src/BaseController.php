@@ -12,8 +12,8 @@ namespace Simplex;
 
 use JMS\Serializer\SerializerInterface;
 use Lukasoppermann\Httpstatus\Httpstatuscodes;
-use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface as Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 abstract class BaseController implements Controller

@@ -10,8 +10,8 @@
  */
 namespace Simplex\Tests\DefinitionLoader;
 
-use DI\ContainerBuilder;
 use DI\Container;
+use DI\ContainerBuilder;
 use PHPUnit\Framework\TestCase;
 use Simplex\DefinitionLoader\ConfigDefinitionLoader;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;

@@ -11,7 +11,6 @@
 namespace Simplex\Tests;
 
 use PHPUnit\Framework\TestCase;
-
 use Simplex\Environment;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
