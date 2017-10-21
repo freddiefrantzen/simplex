@@ -5,11 +5,18 @@
     bootstrap="tests/bootstrap.php">
 
     <testsuites>
-
         <testsuite name="unit">
             <directory>tests</directory>
         </testsuite>
-
     </testsuites>
+
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix=".php">src/config</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 
 </phpunit>
