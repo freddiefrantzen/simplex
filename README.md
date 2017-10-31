@@ -1,4 +1,6 @@
-[![CircleCI](https://circleci.com/gh/freddiefrantzen/simplex.svg?style=svg&circle-token=6fac8255af08c50621568e6ced421fa925f4c301)](https://circleci.com/gh/freddiefrantzen/simplex)
+[![Build Status](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/build.png?b=v0.2)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/build-status/v0.2)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/quality-score.png?b=v0.2)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/?branch=v0.2)
+[![Code Coverage](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/coverage.png?b=v0.2)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/?branch=v0.2)
 
 Simplex Framework
 =================
