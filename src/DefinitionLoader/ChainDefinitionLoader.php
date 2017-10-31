@@ -2,14 +2,14 @@
 
 namespace Simplex\DefinitionLoader;
 
-use DI\ContainerBuilder as ContainerBuilder;
+use DI\ContainerBuilder;
 
 class ChainDefinitionLoader implements DefinitionLoader
 {
     /** @var DefinitionLoader[] */
     private $loaders;
 
-    /** @param DefinitionLoader[] $loaders */
+    /** @param DefinitionLoader ... $loaders */
     public function __construct(...$loaders)
     {
         foreach ($loaders as $loader) {
