@@ -49,11 +49,11 @@ return [
         return new DispatchController($c->get(RouteParamsRegistry::class), $c);
     },
 
-    SetJsonResponseHeaders::class => function (ContainerInterface $c) {
+    SetJsonResponseHeaders::class => function () {
         return new SetJsonResponseHeaders();
     },
 
-    RouteParamsRegistry::class => function (ContainerInterface $c) {
+    RouteParamsRegistry::class => function () {
         return new RouteParamsRegistry();
     },
 
