@@ -4,6 +4,7 @@ namespace Simplex;
 
 use DI\Container;
 use DI\ContainerBuilder as PHPDIContainerBuilder;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 use Simplex\DefinitionLoader\ChainDefinitionLoader;
 use Simplex\DefinitionLoader\ConfigDefinitionLoader;
 use Simplex\DefinitionLoader\CoreDefinitionLoader;
@@ -16,6 +17,8 @@ class Bootstrap
 
     public static function init(string $configDirectoryPath): void
     {
+        AnnotationRegistry::registerLoader('class_exists');
+
         $configDirectory = new \SplFileInfo($configDirectoryPath);
 
         $environment = new Environment();
