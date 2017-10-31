@@ -10,7 +10,7 @@
  */
 namespace Simplex\HttpMiddleware;
 
-use Psr\Container\ContainerInterface;
+use DI\Container;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Simplex\ContainerKeys;
@@ -20,10 +20,10 @@ use Symfony\Component\Routing\RequestContext;
 
 class LoadRoutes
 {
-    /** @var ContainerInterface */
+    /** @var Container */
     private $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(Container $container)
     {
         $this->container = $container;
     }
