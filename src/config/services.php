@@ -13,7 +13,6 @@ use JMS\Serializer\SerializerInterface;
 use Psr\Container\ContainerInterface;
 use Simplex\ContainerKeys;
 use Simplex\Controller;
-use Simplex\Environment;
 use Simplex\HttpMiddleware\DispatchController;
 use Simplex\HttpMiddleware\LoadRoutes;
 use Simplex\HttpMiddleware\MatchRoute;
@@ -25,10 +24,6 @@ use Simplex\Routing\RouteParamsRegistry;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 
 return [
-
-    ContainerKeys::DEBUG_MODE => DI\env(Environment::DEBUG_MODE_ENV_VAR, false),
-    ContainerKeys::ENABLE_CACHE => DI\env(Environment::ENABLE_CACHE_ENV_VAR, false),
-    ContainerKeys::EDITOR => DI\env(Environment::EDITOR_ENV_VAR, null),
 
     RegisterExceptionHandler::class => function (ContainerInterface $c) {
         return new RegisterExceptionHandler(
@@ -60,7 +55,7 @@ return [
     RouteCollectionBuilder::class => function (ContainerInterface $c) {
         return new AnnotationRouteCollectionBuilder(
             (bool) $c->get(ContainerKeys::ENABLE_CACHE),
-            CACHE_DIRECTORY
+            $c->get(ContainerKeys::CACHE_DIRECTORY)
         );
     },
 

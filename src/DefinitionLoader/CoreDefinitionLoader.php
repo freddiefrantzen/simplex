@@ -8,21 +8,30 @@ class CoreDefinitionLoader implements DefinitionLoader
 {
     const DEFAULT_DEFINITION_FILE = __DIR__ . '/../config/services.php';
 
-    /** @var \SplFileInfo */
-    private $coreDefinitionsFile;
+    /** @var array */
+    private $configDefinitions = [];
 
-    public function __construct(\SplFileInfo $coreDefinitionsFile = null)
+    /** @var \SplFileInfo */
+    private $servicesFile;
+
+    public function __construct(array $configDefinitions = [], \SplFileInfo $servicesFile = null)
     {
-        if (null === $coreDefinitionsFile) {
-            $this->coreDefinitionsFile = new \SplFileInfo(self::DEFAULT_DEFINITION_FILE);
+        $this->configDefinitions = $configDefinitions;
+
+        if (null === $servicesFile) {
+            $this->servicesFile = new \SplFileInfo(self::DEFAULT_DEFINITION_FILE);
             return;
         }
 
-        $this->coreDefinitionsFile = $coreDefinitionsFile;
+        $this->servicesFile = $servicesFile;
     }
 
     public function load(ContainerBuilder $containerBuilder): void
     {
-        $containerBuilder->addDefinitions($this->coreDefinitionsFile->getPathname());
+        if (count($this->configDefinitions) > 0) {
+            $containerBuilder->addDefinitions($this->configDefinitions);
+        }
+
+        $containerBuilder->addDefinitions($this->servicesFile->getPathname());
     }
 }

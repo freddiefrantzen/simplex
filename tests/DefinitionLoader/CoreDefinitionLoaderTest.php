@@ -68,6 +68,7 @@ class CoreDefinitionLoaderTest extends TestCase
     private function buildContainer(): Container
     {
         $definitionLoader = new CoreDefinitionLoader(
+            [],
             new \SplFileInfo(
                 $this->getVfsRoot()
                 . DIRECTORY_SEPARATOR

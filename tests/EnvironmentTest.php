@@ -45,7 +45,6 @@ class EnvironmentTest extends TestCase
     private function getBaseFileStructure(): array
     {
         return [
-            self::CONFIG_DIR_NAME => [],
             self::DOTENV_FILENAME => self::FOO_ENV_VAR_NAME . '=' . self::FOO_ENV_VAR_VALUE
         ];
     }
@@ -54,40 +53,8 @@ class EnvironmentTest extends TestCase
     {
         $this->createVirtualFilesystem($this->getBaseFileStructure());
 
-        $this->environmentVariableLoader->load(
-            new \SplFileInfo(
-                $this->getVfsRoot()
-                . DIRECTORY_SEPARATOR
-                . self::CONFIG_DIR_NAME
-            )
-        );
+        $this->environmentVariableLoader->load(new \SplFileInfo($this->getVfsRoot()));
 
         self::assertEquals(self::FOO_ENV_VAR_VALUE, getenv(self::FOO_ENV_VAR_NAME));
-    }
-
-    public function test_defaults_set_if_not_present_in_dot_env_file()
-    {
-        $fileStructure = $this->getBaseFileStructure();
-        unset($fileStructure[self::DOTENV_FILENAME]);
-
-        $this->createVirtualFilesystem($fileStructure);
-
-        $this->environmentVariableLoader->load(
-            new \SplFileInfo(
-                $this->getVfsRoot()
-                . DIRECTORY_SEPARATOR
-                . self::CONFIG_DIR_NAME
-            )
-        );
-
-        self::assertEquals(
-            Environment::COMPILE_CONTAINER_DEFAULT,
-            getenv(Environment::COMPILE_CONTAINER_ENV_VAR)
-        );
-
-        self::assertEquals(
-            (bool) Environment::COMPILE_CONTAINER_DEFAULT,
-            $this->environmentVariableLoader->getCompileContainer()
-        );
     }
 }

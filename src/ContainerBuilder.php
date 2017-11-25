@@ -20,9 +20,6 @@ class ContainerBuilder
     const CONTAINER_CLASS_SUFFIX = 'Container';
     const CONTAINER_CLASS_FILE_EXTENSION = '.php';
 
-    /** @var \SplFileInfo */
-    private $configDirectory;
-
     /** @var PHPDIContainerBuilder */
     private $phpDiContainerBuilder;
 
@@ -41,20 +38,11 @@ class ContainerBuilder
     /** @var string */
     private $compiledContainerClassName;
 
-    /**
-     * @SuppressWarnings(PHPMD.ExcessiveParameterList)
-     */
     public function __construct(
-        \SplFileInfo $configDirectory,
         PHPDIContainerBuilder $phpDiContainerBuilder,
         DefinitionLoader $definitionLoader,
         string $environment
     ) {
-        if (!$configDirectory->isDir() || !$configDirectory->isReadable()) {
-            throw new \RuntimeException('Invalid config directory path ' . $configDirectory->getRealPath());
-        }
-
-        $this->configDirectory = $configDirectory;
         $this->phpDiContainerBuilder = $phpDiContainerBuilder;
         $this->definitionLoader = $definitionLoader;
         $this->environment = $environment;

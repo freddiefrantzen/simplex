@@ -33,10 +33,10 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
     /** @var bool */
     private $enableCache;
 
-    /** @var string */
+    /** @var \SplFileInfo */
     private $cacheDirectory;
 
-    public function __construct(bool $enableCache, string $cacheDirectory)
+    public function __construct(bool $enableCache, \SplFileInfo $cacheDirectory)
     {
         $this->enableCache = $enableCache;
         $this->cacheDirectory = $cacheDirectory;
@@ -83,6 +83,8 @@ class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
             return new ArrayCache();
         }
 
-        return new FilesystemCache($this->cacheDirectory . DIRECTORY_SEPARATOR . self::ROUTING_CACHE_DIRECTORY);
+        return new FilesystemCache(
+            $this->cacheDirectory->getPathname() . DIRECTORY_SEPARATOR . self::ROUTING_CACHE_DIRECTORY
+        );
     }
 }

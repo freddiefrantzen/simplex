@@ -27,9 +27,6 @@ class ContainerBuilderTest extends TestCase
 
     const ENVIRONMENT = 'dev';
 
-    /** @var \SplFileInfo */
-    private $configDirectory;
-
     /** @var PHPDIContainerBuilder */
     private $phpDiContainerBuilder;
 
@@ -48,12 +45,10 @@ class ContainerBuilderTest extends TestCase
             self::CACHE_DIRECTORY => [],
         ]);
 
-        $this->configDirectory = new \SplFileInfo($this->getVfsRoot() . DIRECTORY_SEPARATOR . self::CONFIG_DIRECTORY);
         $this->phpDiContainerBuilder = new PHPDIContainerBuilder();
         $this->definitionLoader = new DefinitionLoader();
 
         $this->containerBuilder = new ContainerBuilder(
-            $this->configDirectory,
             $this->phpDiContainerBuilder,
             $this->definitionLoader,
             self::ENVIRONMENT
