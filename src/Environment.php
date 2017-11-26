@@ -31,7 +31,9 @@ class Environment
     {
         $dotenv = new Dotenv($dotEnvFile->getPath());
 
-        $dotenv->load();
+        if ($dotEnvFile->isReadable()) {
+            $dotenv->load();
+        }
 
         $dotenv->required(self::SIMPLEX_ENV)->notEmpty();
         $dotenv->required(self::ENABLE_CACHE)->isInteger();
