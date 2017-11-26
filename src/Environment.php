@@ -31,11 +31,11 @@ class Environment
     {
         $dotenv = new Dotenv($dotEnvFile->getPath());
 
+        $dotenv->load();
+
         $dotenv->required(self::SIMPLEX_ENV)->notEmpty();
         $dotenv->required(self::ENABLE_CACHE)->isInteger();
         $dotenv->required(self::DEBUG_MODE)->isInteger();
         $dotenv->required(self::COMPILE_CONTAINER)->isInteger();
-
-        $dotenv->load();
     }
 }
