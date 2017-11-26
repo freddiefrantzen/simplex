@@ -18,8 +18,6 @@ class Environment
         $dotEnvFile = $this->getDotEnvFile($projectRootDirectory);
 
         $this->loadDotEnvParameters($dotEnvFile);
-
-        $this->loaded = true;
     }
 
     private function getDotEnvFile(\SplFileInfo $projectRootDirectory): \SplFileInfo
