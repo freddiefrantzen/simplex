@@ -1,6 +1,6 @@
-[![Build Status](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/build.png?b=v0.2)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/build-status/v0.2)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/quality-score.png?b=v0.2)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/?branch=v0.2)
-[![Code Coverage](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/coverage.png?b=v0.2)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/?branch=v0.2)
+[![Build Status](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/build.png?b=master)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/build-status/master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/freddiefrantzen/simplex/?branch=master)
 
 Simplex Framework
 =================
