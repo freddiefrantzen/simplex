@@ -13,7 +13,7 @@ namespace Simplex\Tests\Stub;
 use DI\ContainerBuilder;
 use Simplex\DefinitionLoader\DefinitionLoader as DefinitionLoaderInterface;
 
-class DefinitionLoader implements DefinitionLoaderInterface
+final class DefinitionLoader implements DefinitionLoaderInterface
 {
     public $wasCalled = false;
 

@@ -12,7 +12,7 @@ namespace Simplex\Tests\Stub;
 
 use Zend\Diactoros\Response;
 
-class Controller extends BaseController
+final class Controller extends BaseController
 {
     const EXPECTED_VALUE_ID = 'abc123';
     const EXPECTED_VALUE_FOO = 'bar';

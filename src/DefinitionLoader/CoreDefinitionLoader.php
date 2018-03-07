@@ -4,9 +4,9 @@ namespace Simplex\DefinitionLoader;
 
 use DI\ContainerBuilder;
 
-class CoreDefinitionLoader implements DefinitionLoader
+final class CoreDefinitionLoader implements DefinitionLoader
 {
-    const DEFAULT_DEFINITION_FILE = __DIR__ . '/../config/services.php';
+    private const DEFAULT_DEFINITION_FILE = __DIR__ . '/../DependencyInjection/services.php';
 
     /** @var array */
     private $configDefinitions = [];

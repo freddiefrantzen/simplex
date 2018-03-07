@@ -16,21 +16,21 @@ use PHPUnit\Framework\TestCase;
 use Simplex\DefinitionLoader\ConfigDefinitionLoader;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
-class ConfigDefinitionLoaderTest extends TestCase
+final class ConfigDefinitionLoaderTest extends TestCase
 {
     use VirtualFileSystemCapabilities;
 
-    const ENVIRONMENT = 'dev';
+    private const ENVIRONMENT = 'dev';
 
-    const CONFIG_DIR = 'config';
-    const ROOT_CONFIG_FILE = 'config.php';
-    const CONFIG_DEV_FILE = 'config_dev.php';
+    private const CONFIG_DIR = 'config';
+    private const ROOT_CONFIG_FILE = 'config.php';
+    private const CONFIG_DEV_FILE = 'config_dev.php';
 
-    const CONFIG_PARAM_KEY = 'foo';
-    const CONFIG_PARAM_VALUE = 'bar';
+    private const CONFIG_PARAM_KEY = 'foo';
+    private const CONFIG_PARAM_VALUE = 'bar';
 
-    const CONFIG_DEV_PARAM_KEY = 'buzz';
-    const CONFIG_DEV_PARAM_VALUE = 'baz';
+    private const CONFIG_DEV_PARAM_KEY = 'buzz';
+    private const CONFIG_DEV_PARAM_VALUE = 'baz';
 
     /** @var ContainerBuilder */
     private $containerBuilder;

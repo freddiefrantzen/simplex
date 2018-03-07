@@ -4,7 +4,7 @@ namespace Simplex\DefinitionLoader;
 
 use DI\ContainerBuilder;
 
-class ChainDefinitionLoader implements DefinitionLoader
+final class ChainDefinitionLoader implements DefinitionLoader
 {
     /** @var DefinitionLoader[] */
     private $loaders;

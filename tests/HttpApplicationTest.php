@@ -19,9 +19,9 @@ use Simplex\HttpApplication;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
-class HttpApplicationTest extends TestCase
+final class HttpApplicationTest extends TestCase
 {
-    const MIDDLEWARE_STUB_CONTAINER_KEY = 'test_middleware';
+    public const MIDDLEWARE_STUB_CONTAINER_KEY = 'test_middleware';
 
     public function test_it_returns_a_response()
     {

@@ -16,15 +16,15 @@ use PHPUnit\Framework\TestCase;
 use Simplex\DefinitionLoader\CoreDefinitionLoader;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
-class CoreDefinitionLoaderTest extends TestCase
+final class CoreDefinitionLoaderTest extends TestCase
 {
     use VirtualFileSystemCapabilities;
 
-    const CORE_DEFINITIONS_DIR = 'di';
-    const CORE_DEFINITIONS_FILE = 'definitions.php';
+    private const CORE_DEFINITIONS_DIR = 'di';
+    private const CORE_DEFINITIONS_FILE = 'definitions.php';
 
-    const CORE_PARAM_KEY = 'foo';
-    const CORE_PARAM_VALUE = 'bar';
+    private const CORE_PARAM_KEY = 'foo';
+    private const CORE_PARAM_VALUE = 'bar';
 
     /** @var ContainerBuilder */
     private $containerBuilder;

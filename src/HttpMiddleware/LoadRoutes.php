@@ -18,7 +18,7 @@ use Simplex\Routing\RouteCollectionBuilder;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\RequestContext;
 
-class LoadRoutes
+final class LoadRoutes
 {
     /** @var Container */
     private $container;

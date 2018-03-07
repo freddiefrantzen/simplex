@@ -24,11 +24,11 @@ use Symfony\Component\Routing\RouteCollection;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
+final class AnnotationRouteCollectionBuilder implements RouteCollectionBuilder
 {
-    const ROUTING_CACHE_DIRECTORY = 'router';
+    private const ROUTING_CACHE_DIRECTORY = 'router';
 
-    const CONTROLLER_DIRECTORY = 'Controller';
+    private const CONTROLLER_DIRECTORY = 'Controller';
 
     /** @var bool */
     private $enableCache;

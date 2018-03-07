@@ -22,7 +22,7 @@ use Simplex\Tests\Stub\Controller;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
-class DispatchControllerTest extends TestCase
+final class DispatchControllerTest extends TestCase
 {
     protected function tearDown()
     {

@@ -17,7 +17,7 @@ use Simplex\HttpMiddleware\SetJsonResponseHeaders;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
-class SetJsonResponseHeadersTest extends TestCase
+final class SetJsonResponseHeadersTest extends TestCase
 {
     public function test_it_sets_accept_header()
     {

@@ -16,9 +16,9 @@ use Simplex\ConsoleApplication;
 use Simplex\ContainerKeys;
 use Symfony\Component\Console\Command\Command;
 
-class ConsoleApplicationTest extends TestCase
+final class ConsoleApplicationTest extends TestCase
 {
-    const STUBBED_COMMAND_NAME = 'test:command';
+    public const STUBBED_COMMAND_NAME = 'test:command';
 
     public function test_it_adds_commands_to_symfony_console_application()
     {

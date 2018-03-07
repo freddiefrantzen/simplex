@@ -17,24 +17,22 @@ use Simplex\DefinitionLoader\ModuleDefinitionLoader;
 use Simplex\Tests\Stub\Module;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
-class ModuleDefinitionLoaderTest extends TestCase
+final class ModuleDefinitionLoaderTest extends TestCase
 {
     use VirtualFileSystemCapabilities;
 
-    const CONFIG_DIR = 'config';
-    const SOURCES_DIR = 'src';
+    private const CONFIG_DIR = 'config';
 
-    const MODULES_FILENAME = 'modules.php';
-    const MODULES_CONTAINER_KEY = 'modules';
+    private const MODULES_FILENAME = 'modules.php';
+    private const MODULES_CONTAINER_KEY = 'modules';
 
-    const MODULE_CLASS_NAME = Module::class;
-    const MODULE_CLASS_FILENAME = self::MODULE_CLASS_NAME . '.php';
+    private const MODULE_CLASS_NAME = Module::class;
 
-    const MODULE_DEFINITIONS_DIRECTORY_NAME = 'di';
-    const MODULE_DEFINITIONS_FILENAME = 'definitions.php';
+    private const MODULE_DEFINITIONS_DIRECTORY_NAME = 'di';
+    private const MODULE_DEFINITIONS_FILENAME = 'definitions.php';
 
-    const MODULE_PARAM_KEY = 'foo';
-    const MODULE_PARAM_VALUE = 'bar';
+    private const MODULE_PARAM_KEY = 'foo';
+    private const MODULE_PARAM_VALUE = 'bar';
 
     /** @var ContainerBuilder */
     private $containerBuilder;

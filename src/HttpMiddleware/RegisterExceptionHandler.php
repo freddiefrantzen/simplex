@@ -15,7 +15,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Whoops\Handler\PrettyPageHandler;
 use Whoops\Run;
 
-class RegisterExceptionHandler
+final class RegisterExceptionHandler
 {
     /** @var bool */
     private $debugEnabled;

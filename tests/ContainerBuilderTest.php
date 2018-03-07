@@ -16,16 +16,16 @@ use Simplex\Tests\Stub\DefinitionLoader;
 use Simplex\Tests\Stub\PHPDIContainerBuilder;
 use Simplex\Tests\Util\VirtualFileSystemCapabilities;
 
-class ContainerBuilderTest extends TestCase
+final class ContainerBuilderTest extends TestCase
 {
     use VirtualFileSystemCapabilities;
 
-    const CONFIG_DIRECTORY = 'config';
-    const CACHE_DIRECTORY = 'cache';
-    const COMPILED_CONTAINER_DIRECTORY = 'container';
-    const COMPILED_CONTAINER_FILE = 'DevContainer.php';
+    private const CONFIG_DIRECTORY = 'config';
+    private const CACHE_DIRECTORY = 'cache';
+    private const COMPILED_CONTAINER_DIRECTORY = 'container';
+    private const COMPILED_CONTAINER_FILE = 'DevContainer.php';
 
-    const ENVIRONMENT = 'dev';
+    private const ENVIRONMENT = 'dev';
 
     /** @var PHPDIContainerBuilder */
     private $phpDiContainerBuilder;

@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 abstract class BaseController implements Controller
 {
-    const JSON_FORMAT = 'json';
+    protected const JSON_FORMAT = 'json';
 
     /** @var UrlGeneratorInterface */
     protected $urlGenerator;
@@ -56,7 +56,7 @@ abstract class BaseController implements Controller
         return $this->response->withStatus($status);
     }
 
-    public function setHeader(string $headerName, string $headerValue)
+    public function setHeader(string $headerName, string $headerValue): void
     {
         $this->response = $this->response->withHeader($headerName, $headerValue);
     }

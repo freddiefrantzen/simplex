@@ -13,7 +13,7 @@ namespace Simplex\Tests\Stub;
 use Psr\Http\Message\ResponseInterface;
 use Simplex\Controller;
 
-class BaseController implements Controller
+abstract class BaseController implements Controller
 {
     public static $baz;
 

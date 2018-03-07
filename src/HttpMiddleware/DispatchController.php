@@ -17,7 +17,7 @@ use Simplex\ContainerKeys;
 use Simplex\Controller;
 use Simplex\Routing\RouteParamsRegistry;
 
-class DispatchController
+final class DispatchController
 {
     /** @var RouteParamsRegistry */
     private $routeParamsRegistry;

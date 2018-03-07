@@ -10,7 +10,7 @@
  */
 namespace Simplex\Exception;
 
-class ResourceNotFoundException extends \RuntimeException
+final class ResourceNotFoundException extends \RuntimeException
 {
 
 }

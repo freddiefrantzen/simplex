@@ -7,9 +7,9 @@ use Simplex\ContainerKeys;
 use Simplex\Module;
 use Symfony\Component\Finder\Finder;
 
-class ModuleDefinitionLoader implements DefinitionLoader
+final class ModuleDefinitionLoader implements DefinitionLoader
 {
-    const MODULES_FILENAME = 'modules.php';
+    private const MODULES_FILENAME = 'modules.php';
 
     /** @var \SplFileInfo */
     private $configDirectory;

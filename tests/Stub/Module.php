@@ -10,7 +10,7 @@
  */
 namespace Simplex\Tests\Stub;
 
-class Module implements \Simplex\Module
+final class Module implements \Simplex\Module
 {
     public static $serviceDefinitionDirectory = null;
 

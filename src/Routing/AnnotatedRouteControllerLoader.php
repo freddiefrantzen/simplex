@@ -13,7 +13,7 @@ namespace Simplex\Routing;
 use Symfony\Component\Routing\Loader\AnnotationClassLoader;
 use Symfony\Component\Routing\Route;
 
-class AnnotatedRouteControllerLoader extends AnnotationClassLoader
+final class AnnotatedRouteControllerLoader extends AnnotationClassLoader
 {
     /**
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)

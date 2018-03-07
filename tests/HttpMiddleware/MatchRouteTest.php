@@ -20,10 +20,10 @@ use Symfony\Component\Routing\RouteCollection;
 use Zend\Diactoros\Response;
 use Zend\Diactoros\ServerRequest;
 
-class MatchRouteTest extends TestCase
+final class MatchRouteTest extends TestCase
 {
-    const TEST_ROUTE_NAME = 'test';
-    const TEST_ROUTE_URI = '/test';
+    private const TEST_ROUTE_NAME = 'test';
+    private const TEST_ROUTE_URI = '/test';
 
     public function test_it_passes_the_matched_route_to_the_registry()
     {

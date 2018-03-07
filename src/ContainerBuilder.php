@@ -16,9 +16,9 @@ use Simplex\DefinitionLoader\DefinitionLoader;
 
 class ContainerBuilder
 {
-    const COMPILED_CONTAINER_DIRECTORY_NAME = 'container';
-    const CONTAINER_CLASS_SUFFIX = 'Container';
-    const CONTAINER_CLASS_FILE_EXTENSION = '.php';
+    private const CONTAINER_CLASS_SUFFIX = 'Container';
+
+    private const CONTAINER_CLASS_FILE_EXTENSION = '.php';
 
     /** @var PHPDIContainerBuilder */
     private $phpDiContainerBuilder;

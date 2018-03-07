@@ -12,7 +12,7 @@ namespace Simplex\Tests\Stub;
 
 use DI\ContainerBuilder;
 
-class PHPDIContainerBuilder extends ContainerBuilder
+final class PHPDIContainerBuilder extends ContainerBuilder
 {
     /** @var bool */
     public $compilationEnabled = false;

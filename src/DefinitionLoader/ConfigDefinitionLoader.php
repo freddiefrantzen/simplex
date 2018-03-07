@@ -4,10 +4,10 @@ namespace Simplex\DefinitionLoader;
 
 use DI\ContainerBuilder;
 
-class ConfigDefinitionLoader implements DefinitionLoader
+final class ConfigDefinitionLoader implements DefinitionLoader
 {
-    const CONFIG_FILENAME = 'config';
-    const CONFIG_FILE_EXTENSION = '.php';
+    private const CONFIG_FILENAME = 'config';
+    private const CONFIG_FILE_EXTENSION = '.php';
 
     /** @var \SplFileInfo */
     private $configDirectory;
