@@ -10,6 +10,7 @@
  */
 namespace Simplex\Tests\Stub;
 
+use DI\CompiledContainer;
 use DI\ContainerBuilder;
 
 final class PHPDIContainerBuilder extends ContainerBuilder
@@ -30,7 +31,7 @@ final class PHPDIContainerBuilder extends ContainerBuilder
         $this->containerBuilt = false;
     }
 
-    public function enableCompilation(string $directory, string $className = 'CompiledContainer'): ContainerBuilder
+    public function enableCompilation(string $directory, string $className = 'CompiledContainer', string $containerParentClass = CompiledContainer::class): ContainerBuilder
     {
         $this->compilationEnabled = true;
 
@@ -42,7 +43,7 @@ final class PHPDIContainerBuilder extends ContainerBuilder
     /**
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function addDefinitions($definitions): ContainerBuilder
+    public function addDefinitions(...$definitions): ContainerBuilder
     {
         $this->definitionsLoaded = true;
 
